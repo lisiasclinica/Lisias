@@ -1,153 +1,302 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clinicalisias - Clínica Psicopedagógica</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #1f5f3a;
-            color: white;
-        }
+<meta charset="UTF-8">
+<title>Clinicalisias – Clínica Psicopedagógica</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        header {
-            background-color: #174c2e;
-            padding: 20px;
-            text-align: center;
-        }
+<style>
 
-        header h1 {
-            color: #d4af37;
-            margin: 0;
-            font-size: 36px;
-        }
+/* =====================
+   BASE
+===================== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4f6f8;
+    color: #333;
+}
 
-        header p {
-            margin: 5px 0 0;
-        }
+a { text-decoration: none; }
 
-        nav {
-            text-align: center;
-            padding: 15px;
-            background-color: #1f5f3a;
-        }
+/* =====================
+   MENU
+===================== */
+nav {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    z-index: 1000;
+}
 
-        nav a {
-            color: #d4af37;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-        }
+.nav-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        section {
-            padding: 60px 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
+.nav-logo {
+    font-weight: bold;
+    color: #1f5f3a;
+    font-size: 18px;
+}
 
-        h2 {
-            color: #d4af37;
-            text-align: center;
-            margin-bottom: 30px;
-        }
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #1f5f3a;
+    cursor: pointer;
+}
 
-        .card {
-            background-color: #174c2e;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
+.nav-links {
+    display: flex;
+    align-items: center;
+}
 
-        .whatsapp {
-            display: block;
-            width: 250px;
-            margin: 40px auto;
-            text-align: center;
-            background-color: #d4af37;
-            color: #1f5f3a;
-            padding: 15px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+.nav-links a {
+    margin-left: 20px;
+    color: #333;
+    font-weight: 500;
+}
 
-        footer {
-            background-color: #174c2e;
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-        }
+.nav-links a:hover {
+    color: #1f5f3a;
+}
 
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 28px;
-            }
-        }
-    </style>
+.nav-whatsapp {
+    background: #d4af37;
+    color: #1f5f3a;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+/* =====================
+   HERO SLIDER
+===================== */
+.hero-slider {
+    position: relative;
+    height: 420px;
+    overflow: hidden;
+}
+
+.slides, .slide {
+    position: absolute;
+    inset: 0;
+}
+
+.slide {
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.slide.active { opacity: 1; }
+
+.hero-slider::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 20px;
+}
+
+.hero-content h1 { font-size: 42px; }
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: #d4af37;
+    color: #1f5f3a;
+    border-radius: 30px;
+    font-weight: bold;
+}
+
+/* =====================
+   SEÇÕES
+===================== */
+section {
+    max-width: 1100px;
+    margin: auto;
+    padding: 70px 20px;
+}
+
+h2 { 
+    color: #1f5f3a;
+    margin-bottom: 20px;
+}
+
+/* =====================
+   CARDS
+===================== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 25px;
+}
+
+.card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,.08);
+}
+
+/* =====================
+   FOOTER
+===================== */
+footer {
+    background: #1f5f3a;
+    color: #fff;
+    text-align: center;
+    padding: 25px;
+}
+
+/* =====================
+   MOBILE
+===================== */
+@media (max-width: 768px) {
+
+    .menu-toggle { display: block; }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .nav-links.active { display: flex; }
+
+    .nav-links a {
+        margin: 8px 0;
+    }
+
+    .hero-slider { height: 320px; }
+
+    .hero-content h1 { font-size: 28px; }
+}
+
+</style>
 </head>
+
 <body>
 
-<header>
-    <h1>Clínica Lísias</h1>
-    <p>Clínica Psicopedagógica</p>
-</header>
-
 <nav>
-    <a href="#sobre">Sobre</a>
-    <a href="#servicos">Serviços</a>
-    <a href="#profissional">Profissional</a>
-    <a href="#contato">Contato</a>
+  <div class="nav-container">
+    <div class="nav-logo">Clinicalisias</div>
+    <button class="menu-toggle">☰</button>
+    <div class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#profissional">Profissional</a>
+      <a href="#contato">Contato</a>
+      <a href="https://wa.me/5500000000000" target="_blank" class="nav-whatsapp">WhatsApp</a>
+    </div>
+  </div>
 </nav>
 
+<div class="hero-slider">
+  <div class="slides">
+    <div class="slide active" style="background-image:url('clinica1.jpg')"></div>
+    <div class="slide" style="background-image:url('clinica2.jpg')"></div>
+    <div class="slide" style="background-image:url('clinica3.jpg')"></div>
+  </div>
+
+  <div class="hero-content">
+    <h1>Clínica Psicopedagógica</h1>
+    <p>Cuidando do desenvolvimento e da aprendizagem</p>
+    <a href="#contato" class="btn">Agendar Atendimento</a>
+  </div>
+</div>
+
 <section id="sobre">
-    <h2>Sobre a Clínica</h2>
-    <div class="card">
-        <p>
-            A Clinicalisias é uma clínica psicopedagógica dedicada ao desenvolvimento 
-            cognitivo, emocional e educacional de crianças, adolescentes e adultos. 
-            Nosso compromisso é oferecer atendimento humanizado e personalizado.
-        </p>
-    </div>
+<h2>Sobre a Clínica</h2>
+<p>
+A Clinicalisias oferece atendimento psicopedagógico especializado para crianças,
+adolescentes e adultos que apresentam dificuldades de aprendizagem,
+atenção, concentração e desenvolvimento escolar.
+</p>
 </section>
 
 <section id="servicos">
-    <h2>Serviços</h2>
-    <div class="card">
-        <p>✔ Avaliação Psicopedagógica</p>
-        <p>✔ Intervenção Psicopedagógica</p>
-        <p>✔ Orientação para Pais</p>
-        <p>✔ Acompanhamento Escolar</p>
-    </div>
+<h2>Serviços</h2>
+<div class="cards">
+<div class="card"><strong>Avaliação Psicopedagógica</strong><br><br>Diagnóstico detalhado das dificuldades de aprendizagem.</div>
+<div class="card"><strong>Intervenção Psicopedagógica</strong><br><br>Plano personalizado para desenvolvimento cognitivo.</div>
+<div class="card"><strong>Orientação para Pais</strong><br><br>Acompanhamento familiar e orientação escolar.</div>
+<div class="card"><strong>Acompanhamento Escolar</strong><br><br>Suporte contínuo no processo educacional.</div>
+</div>
 </section>
 
 <section id="profissional">
-    <h2>Sobre a Profissional</h2>
-    <div class="card">
-        <p>
-            Profissional especializada em Psicopedagogia Clínica e Institucional,
-            com foco em dificuldades de aprendizagem e desenvolvimento escolar.
-        </p>
-    </div>
+<h2>Sobre a Profissional</h2>
+<p>
+Profissional especializada em Psicopedagogia Clínica e Institucional,
+com foco em dificuldades de aprendizagem, TDAH,
+transtornos do desenvolvimento e acompanhamento escolar.
+</p>
 </section>
 
 <section id="contato">
-    <h2>Contato</h2>
-    <div class="card">
-        <p>📍 Cidade / Estado</p>
-        <p>📞 (00) 00000-0000</p>
-        <p>📧 email@clinicalisias.com.br</p>
-    </div>
-
-    <a class="whatsapp" href="https://wa.me/5500000000000" target="_blank">
-        Agendar pelo WhatsApp
-    </a>
+<h2>Contato</h2>
+<p>📍 Sua cidade – Estado</p>
+<p>📞 (00) 00000-0000</p>
+<p>📧 contato@clinicalisias.com.br</p>
+<br>
+<a href="https://wa.me/5500000000000" target="_blank" class="btn">
+Agendar pelo WhatsApp
+</a>
 </section>
 
 <footer>
-    © 2026 Clinicalisias - Todos os direitos reservados
+© 2026 – Clinicalisias | Todos os direitos reservados
 </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const slides = document.querySelectorAll(".slide");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    let current = 0;
+
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove("active"));
+        slides[index].classList.add("active");
+    }
+
+    function nextSlide() {
+        current = (current + 1) % slides.length;
+        showSlide(current);
+    }
+
+    setInterval(nextSlide, 6000);
+
+    menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+    });
+
+});
+</script>
 
 </body>
 </html>
