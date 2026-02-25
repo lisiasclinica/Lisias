@@ -4,12 +4,150 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clinicalisias - Clínica Psicopedagógica</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1f5f3a;
+            color: white;
+        }
+
+        header {
+            background-color: #174c2e;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #d4af37;
+            margin: 0;
+            font-size: 36px;
+        }
+
+        header p {
+            margin: 5px 0 0;
+        }
+
+        nav {
+            text-align: center;
+            padding: 15px;
+            background-color: #1f5f3a;
+        }
+
+        nav a {
+            color: #d4af37;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h2 {
+            color: #d4af37;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #174c2e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .whatsapp {
+            display: block;
+            width: 250px;
+            margin: 40px auto;
+            text-align: center;
+            background-color: #d4af37;
+            color: #1f5f3a;
+            padding: 15px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #174c2e;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
 <body>
 
+<header>
     <h1>Clinicalisias</h1>
     <p>Clínica Psicopedagógica</p>
+</header>
+
+<nav>
+    <a href="#sobre">Sobre</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#profissional">Profissional</a>
+    <a href="#contato">Contato</a>
+</nav>
+
+<section id="sobre">
+    <h2>Sobre a Clínica</h2>
+    <div class="card">
+        <p>
+            A Clinicalisias é uma clínica psicopedagógica dedicada ao desenvolvimento 
+            cognitivo, emocional e educacional de crianças, adolescentes e adultos. 
+            Nosso compromisso é oferecer atendimento humanizado e personalizado.
+        </p>
+    </div>
+</section>
+
+<section id="servicos">
+    <h2>Serviços</h2>
+    <div class="card">
+        <p>✔ Avaliação Psicopedagógica</p>
+        <p>✔ Intervenção Psicopedagógica</p>
+        <p>✔ Orientação para Pais</p>
+        <p>✔ Acompanhamento Escolar</p>
+    </div>
+</section>
+
+<section id="profissional">
+    <h2>Sobre a Profissional</h2>
+    <div class="card">
+        <p>
+            Profissional especializada em Psicopedagogia Clínica e Institucional,
+            com foco em dificuldades de aprendizagem e desenvolvimento escolar.
+        </p>
+    </div>
+</section>
+
+<section id="contato">
+    <h2>Contato</h2>
+    <div class="card">
+        <p>📍 Cidade / Estado</p>
+        <p>📞 (00) 00000-0000</p>
+        <p>📧 email@clinicalisias.com.br</p>
+    </div>
+
+    <a class="whatsapp" href="https://wa.me/5500000000000" target="_blank">
+        Agendar pelo WhatsApp
+    </a>
+</section>
+
+<footer>
+    © 2026 Clinicalisias - Todos os direitos reservados
+</footer>
 
 </body>
 </html>
