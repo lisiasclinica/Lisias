@@ -417,13 +417,18 @@ document.addEventListener("DOMContentLoaded", function () {
         {nome: "Caiçara - RS", coords: [-27.2757, -53.4252]},
         {nome: "Vicente Dutra - RS", coords: [-27.1617, -53.4042]},
         {nome: "Pinhal - RS", coords: [-27.5086, -53.2085]}
-    ];
+       
+  var iconeLisias = L.icon({
+    iconUrl: 'lisias-logo.png',
+    iconSize: [45, 45],
+    iconAnchor: [22, 45],
+    popupAnchor: [0, -45]
+});
 
-    cidades.forEach(function(cidade) {
-        L.marker(cidade.coords)
-            .addTo(map)
-            .bindPopup(cidade.nome);
-    });
+cidades.forEach(function(cidade) {
+    L.marker(cidade.coords, { icon: iconeLisias })
+        .addTo(map)
+        .bindPopup(cidade.nome);
 
 });
 </script>
