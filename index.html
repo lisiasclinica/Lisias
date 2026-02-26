@@ -231,6 +231,11 @@ footer {
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+</head>
 </head>
 
 <body>
@@ -323,6 +328,32 @@ Ambiente organizado com horários e acompanhamento profissional.
 
 </div>
 </section>
+<script>
+    var map = L.map('map').setView([-27.45, -53.45], 9);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Lista de cidades atendidas
+    var cidades = [
+        {nome: "Seberi - RS", coords: [-27.4811, -53.4037]},
+        {nome: "Frederico Westphalen - RS", coords: [-27.3590, -53.3943]},
+        {nome: "Cristal do Sul - RS", coords: [-27.4525, -53.2456]},
+        {nome: "Jaboticaba - RS", coords: [-27.6322, -53.2763]},
+        {nome: "Boa Vista das Missões - RS", coords: [-27.6677, -53.3106]},
+        {nome: "Rodeio Bonito - RS", coords: [-27.4741, -53.1695]},
+        {nome: "Caiçara - RS", coords: [-27.2757, -53.4252]},
+        {nome: "Vicente Dutra - RS", coords: [-27.1617, -53.4042]},
+        {nome: "Pinhal - RS", coords: [-27.5086, -53.2085]}
+    ];
+
+    cidades.forEach(function(cidade) {
+        L.marker(cidade.coords)
+            .addTo(map)
+            .bindPopup(cidade.nome);
+    });
+</script>
 
 <section id="contato">
 <h2>Contato</h2>
