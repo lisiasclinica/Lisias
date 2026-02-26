@@ -236,7 +236,6 @@ footer {
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 </head>
-</head>
 
 <body>
 
@@ -328,32 +327,13 @@ Ambiente organizado com horários e acompanhamento profissional.
 
 </div>
 </section>
-<script>
-    var map = L.map('map').setView([-27.45, -53.45], 9);
+   <section id="mapa">
+  <h2>Mapa de Atuação</h2>
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+  <div id="map" style="height: 500px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,.15);"></div>
 
-    // Lista de cidades atendidas
-    var cidades = [
-        {nome: "Seberi - RS", coords: [-27.4811, -53.4037]},
-        {nome: "Frederico Westphalen - RS", coords: [-27.3590, -53.3943]},
-        {nome: "Cristal do Sul - RS", coords: [-27.4525, -53.2456]},
-        {nome: "Jaboticaba - RS", coords: [-27.6322, -53.2763]},
-        {nome: "Boa Vista das Missões - RS", coords: [-27.6677, -53.3106]},
-        {nome: "Rodeio Bonito - RS", coords: [-27.4741, -53.1695]},
-        {nome: "Caiçara - RS", coords: [-27.2757, -53.4252]},
-        {nome: "Vicente Dutra - RS", coords: [-27.1617, -53.4042]},
-        {nome: "Pinhal - RS", coords: [-27.5086, -53.2085]}
-    ];
+</section>
 
-    cidades.forEach(function(cidade) {
-        L.marker(cidade.coords)
-            .addTo(map)
-            .bindPopup(cidade.nome);
-    });
-</script>
 
 <section id="contato">
 <h2>Contato</h2>
@@ -372,7 +352,6 @@ Ambiente organizado com horários e acompanhamento profissional.
 <br><br>
 </a>
 
-</section>
 </section>
 
 <footer>
@@ -419,6 +398,35 @@ document.addEventListener("DOMContentLoaded", function () {
    class="float-btn float-maps">
    📍
 </a>
+   <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    var map = L.map('map').setView([-27.45, -53.45], 9);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    var cidades = [
+        {nome: "Seberi - RS", coords: [-27.4811, -53.4037]},
+        {nome: "Frederico Westphalen - RS", coords: [-27.3590, -53.3943]},
+        {nome: "Cristal do Sul - RS", coords: [-27.4525, -53.2456]},
+        {nome: "Jaboticaba - RS", coords: [-27.6322, -53.2763]},
+        {nome: "Boa Vista das Missões - RS", coords: [-27.6677, -53.3106]},
+        {nome: "Rodeio Bonito - RS", coords: [-27.4741, -53.1695]},
+        {nome: "Caiçara - RS", coords: [-27.2757, -53.4252]},
+        {nome: "Vicente Dutra - RS", coords: [-27.1617, -53.4042]},
+        {nome: "Pinhal - RS", coords: [-27.5086, -53.2085]}
+    ];
+
+    cidades.forEach(function(cidade) {
+        L.marker(cidade.coords)
+            .addTo(map)
+            .bindPopup(cidade.nome);
+    });
+
+});
+</script>
 
 </body>
 </html>
