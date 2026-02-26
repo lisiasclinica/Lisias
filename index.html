@@ -419,11 +419,32 @@ document.addEventListener("DOMContentLoaded", function () {
         {nome: "Pinhal - RS", coords: [-27.5086, -53.2085]}
        ];
 
-var iconeLisias = L.icon({
-    iconUrl: 'lisias-logo.png',
-    iconSize: [45, 45],
-    iconAnchor: [22, 45],
-    popupAnchor: [0, -45]
+var iconeLisias = L.divIcon({
+    html: `
+        <div style="
+            background: #ffffff;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+            border: 3px solid #1f5f3a;
+        ">
+            <img src="lisias-logo.png" style="width:45px; height:45px;">
+        </div>
+    `,
+    className: "",
+    iconSize: [70, 70],
+    iconAnchor: [35, 70],
+    popupAnchor: [0, -70]
+});
+
+cidades.forEach(function(cidade) {
+    L.marker(cidade.coords, { icon: iconeLisias })
+        .addTo(map)
+        .bindPopup(cidade.nome);
 });
 
 cidades.forEach(function(cidade) {
