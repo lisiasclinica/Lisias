@@ -235,35 +235,31 @@ z-index:999;
 /* SLIDER CONTRATURNO */
 
 .slider-contraturno{
-position: relative;
-width: 100%;
-height: 400px;
-margin-top: 30px;
-border-radius: 15px;
-overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin: 30px auto;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 .slide-ct{
-position: absolute;
-width: 100%;
-height: 100%;
-opacity: 0;
-transition: opacity 1s ease;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+  background-size: cover;
+  background-position: center;
 }
 
 .slide-ct.active{
-opacity: 1;
+  opacity: 1;
 }
 
 .slide-ct iframe{
-width: 100%;
-height: 100%;
-border: none;
-}
-
-.slide-ct:not(:has(iframe)){
-background-size: cover;
-background-position: center;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 /* MOBILE */
@@ -367,36 +363,60 @@ allowfullscreen>
 
 <section id="contraturno">
 
-<h2>Escola de Contraturno</h2>
+  <h2>Escola de Contraturno</h2>
 
-<p>
-Nosso contraturno escolar oferece um ambiente seguro, acolhedor e educativo,
-proporcionando apoio pedagógico, desenvolvimento socioemocional
-e atividades complementares para crianças em idade escolar.
-</p>
+  <p>
+    Nosso contraturno escolar oferece um ambiente seguro, acolhedor e educativo,
+    proporcionando apoio pedagógico, desenvolvimento socioemocional
+    e atividades complementares para crianças em idade escolar.
+  </p>
 
-<br>
+  <div class="slider-contraturno">
 
-<div class="slider-contraturno">
+    <div class="slide-ct active">
+      <iframe
+        src="https://www.youtube.com/embed/HAzstbNl7Vw"
+        title="Contraturno Escolar Clínica Lísias"
+        frameborder="0"
+        allowfullscreen>
+      </iframe>
+    </div>
 
-<!-- VÍDEO -->
-<div class="slide-ct active">
-<iframe
-src="https://www.youtube.com/embed/HAzstbNl7Vw"
-allowfullscreen>
-</iframe>
-</div>
+    <div class="slide-ct" style="background-image:url('EscolaBrincando2.png')"></div>
+    <div class="slide-ct" style="background-image:url('EscolaAmbiente.png')"></div>
+    <div class="slide-ct" style="background-image:url('EscolaBrincando.png')"></div>
+    <div class="slide-ct" style="background-image:url('EscolaBrinquedoteca.png')"></div>
+    <div class="slide-ct" style="background-image:url('EscolaBriquedoteca2.png')"></div>
+    <div class="slide-ct" style="background-image:url('EscolaCrianças.png')"></div>
+    <div class="slide-ct" style="background-image:url('EscolaCrinaçasatividade.png')"></div>
 
-<!-- FOTOS -->
-<div class="slide-ct" style="background-image:url('EscolaBrincando2.png')"></div>
-<div class="slide-ct" style="background-image:url('EscolaAmbiente.png')"></div>
-<div class="slide-ct" style="background-image:url('EscolaBrincando.png')"></div>
-<div class="slide-ct" style="background-image:url('EscolaBrinquedoteca.png')"></div>
-<div class="slide-ct" style="background-image:url('EscolaBriquedoteca2.png')"></div>
-<div class="slide-ct" style="background-image:url('EscolaCrianças.png')"></div>
-<div class="slide-ct" style="background-image:url('EscolaCrinaçasatividade.png')"></div>
+  </div>
 
-</div>
+  <div class="cards">
+
+    <div class="card">
+      <strong>📚 Apoio Escolar</strong><br><br>
+      Auxílio nas tarefas e reforço das disciplinas escolares.
+    </div>
+
+    <div class="card">
+      <strong>🎨 Atividades Lúdicas</strong><br><br>
+      Oficinas criativas, jogos educativos e desenvolvimento cognitivo.
+    </div>
+
+    <div class="card">
+      <strong>🧠 Desenvolvimento Socioemocional</strong><br><br>
+      Trabalhamos autonomia, organização e habilidades sociais.
+    </div>
+
+    <div class="card">
+      <strong>🍎 Rotina Estruturada</strong><br><br>
+      Ambiente organizado com horários e acompanhamento profissional.
+    </div>
+
+  </div>
+
+</section>
 
 <br>
 
@@ -602,17 +622,18 @@ L.marker(c.coords,{icon:iconeLisias})
 .bindPopup(c.nome);
 });
 
-  <script>
-let slidesCT = document.querySelectorAll(".slide-ct");
-let indexCT = 0;
+document.addEventListener("DOMContentLoaded", function () {
+  const slidesCT = document.querySelectorAll(".slide-ct");
+  let indexCT = 0;
 
-function trocarSlideCT(){
-    slidesCT.forEach(s => s.classList.remove("active"));
+  function trocarSlideCT() {
+    slidesCT.forEach(slide => slide.classList.remove("active"));
     indexCT = (indexCT + 1) % slidesCT.length;
     slidesCT[indexCT].classList.add("active");
-}
+  }
 
-setInterval(trocarSlideCT, 4000);
+  setInterval(trocarSlideCT, 4000);
+});
 </script>
 
 </body>
