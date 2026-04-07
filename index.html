@@ -646,18 +646,60 @@ L.marker(c.coords,{icon:iconeLisias})
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const slidesCT = document.querySelectorAll(".slide-ct");
-  let indexCT = 0;
 
-  function trocarSlideCT() {
-    slidesCT.forEach(slide => slide.classList.remove("active"));
-    indexCT = (indexCT + 1) % slidesCT.length;
-    slidesCT[indexCT].classList.add("active");
+  const slides = document.querySelectorAll("#contraturno .slide-ct");
+  const next = document.querySelector("#contraturno .next");
+  const prev = document.querySelector("#contraturno .prev");
+
+  let index = 0;
+  let intervalo;
+
+  function showSlide(i){
+    slides.forEach(s => s.classList.remove("active"));
+    slides[i].classList.add("active");
   }
 
-  setInterval(trocarSlideCT, 4000);
+  function nextSlide(){
+    index = (index + 1) % slides.length;
+    showSlide(index);
+  }
+
+  function prevSlide(){
+    index = (index - 1 + slides.length) % slides.length;
+    showSlide(index);
+  }
+
+  function iniciarAuto(){
+    intervalo = setInterval(nextSlide, 6000);
+  }
+
+  function resetAuto(){
+    clearInterval(intervalo);
+    iniciarAuto();
+  }
+
+  // BOTÕES
+  if(next){
+    next.addEventListener("click", () => {
+      nextSlide();
+      resetAuto();
+    });
+  }
+
+  if(prev){
+    prev.addEventListener("click", () => {
+      prevSlide();
+      resetAuto();
+    });
+  }
+
+  // INICIA
+  showSlide(index);
+  iniciarAuto();
+
 });
 </script>
+
 
 </body>
 </html>
