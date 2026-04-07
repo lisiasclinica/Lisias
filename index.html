@@ -262,6 +262,48 @@ z-index:999;
   border: none;
 }
 
+  /* BOTÕES FLUTUANTES */
+.float-btn { ... }
+.float-whatsapp { ... }
+.float-maps { ... }
+.insta-float { ... }
+
+/* BOTÃO DO VÍDEO */
+.btn-video{
+position:absolute;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:#d4af37;
+color:#1f5f3a;
+padding:10px 20px;
+border-radius:20px;
+font-weight:bold;
+z-index:3;
+}
+
+/* SETAS DO SLIDER */
+.prev, .next{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:rgba(0,0,0,0.5);
+color:#fff;
+border:none;
+padding:10px 15px;
+font-size:22px;
+cursor:pointer;
+z-index:5;
+border-radius:50%;
+}
+
+.prev{ left:10px; }
+.next{ right:10px; }
+
+.prev:hover, .next:hover{
+background:#1f5f3a;
+}
+  
 /* MOBILE */
 
 @media(max-width:768px){
@@ -371,17 +413,30 @@ allowfullscreen>
     e atividades complementares para crianças em idade escolar.
   </p>
 
+  <!-- SLIDER -->
   <div class="slider-contraturno">
 
+    <!-- BOTÕES -->
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+
+    <!-- VÍDEO -->
     <div class="slide-ct active">
       <iframe
         src="https://www.youtube.com/embed/HAzstbNl7Vw"
         title="Contraturno Escolar Clínica Lísias"
-        frameborder="0"
         allowfullscreen>
       </iframe>
+
+      <!-- BOTÃO YOUTUBE -->
+      <a href="https://youtube.com/shorts/HAzstbNl7Vw"
+         target="_blank"
+         class="btn-video">
+         ▶ Assistir no YouTube
+      </a>
     </div>
 
+    <!-- FOTOS -->
     <div class="slide-ct" style="background-image:url('EscolaBrincando2.png')"></div>
     <div class="slide-ct" style="background-image:url('EscolaAmbiente.png')"></div>
     <div class="slide-ct" style="background-image:url('EscolaBrincando.png')"></div>
@@ -392,6 +447,7 @@ allowfullscreen>
 
   </div>
 
+  <!-- CARDS -->
   <div class="cards">
 
     <div class="card">
@@ -416,47 +472,14 @@ allowfullscreen>
 
   </div>
 
-</section>
-
-<br>
-
-<div class="cards">
-
-<div class="card">
-<strong>📚 Apoio Escolar</strong><br><br>
-Auxílio nas tarefas e reforço das disciplinas escolares.
-</div>
-
-<div class="card">
-<strong>🎨 Atividades Lúdicas</strong><br><br>
-Oficinas criativas, jogos educativos e desenvolvimento cognitivo.
-</div>
-
-<div class="card">
-<strong>🧠 Desenvolvimento Socioemocional</strong><br><br>
-Trabalhamos autonomia, organização e habilidades sociais.
-</div>
-
-<div class="card">
-<strong>🍎 Rotina Estruturada</strong><br><br>
-Ambiente organizado com horários e acompanhamento profissional.
-</div>
-
-</div>
-
-<br>
-
-<div style="text-align:center;">
-
-<a href="https://wa.me/55984246260?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20contraturno%20escolar"
-target="_blank"
-class="btn">
-
-📲 Saber mais sobre o Contraturno
-
-</a>
-
-</div>
+  <!-- BOTÃO FINAL -->
+  <div style="text-align:center; margin-top:30px;">
+    <a href="https://wa.me/55984246260?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20contraturno%20escolar"
+       target="_blank"
+       class="btn">
+       📲 Saber mais sobre o Contraturno
+    </a>
+  </div>
 
 </section>
 
