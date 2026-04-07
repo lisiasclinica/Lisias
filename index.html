@@ -220,6 +220,52 @@ box-shadow:0 4px 12px rgba(0,0,0,.25);
 z-index:999;
 }
 
+  /* =====================
+   BOTÕES FLUTUANTES
+===================== */
+
+.float-btn {
+    position: fixed;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    ...
+}
+
+/* SLIDER CONTRATURNO */
+
+.slider-contraturno{
+position: relative;
+width: 100%;
+height: 400px;
+margin-top: 30px;
+border-radius: 15px;
+overflow: hidden;
+}
+
+.slide-ct{
+position: absolute;
+width: 100%;
+height: 100%;
+opacity: 0;
+transition: opacity 1s ease;
+}
+
+.slide-ct.active{
+opacity: 1;
+}
+
+.slide-ct iframe{
+width: 100%;
+height: 100%;
+border: none;
+}
+
+.slide-ct:not(:has(iframe)){
+background-size: cover;
+background-position: center;
+}
+
 /* MOBILE */
 
 @media(max-width:768px){
@@ -331,16 +377,24 @@ e atividades complementares para crianças em idade escolar.
 
 <br>
 
-<div style="max-width:450px; margin:auto;">
+<div class="slider-contraturno">
 
+<!-- VÍDEO -->
+<div class="slide-ct active">
 <iframe
-width="100%"
-height="700"
 src="https://www.youtube.com/embed/HAzstbNl7Vw"
-title="Contraturno Escolar Clínica Lísias"
-frameborder="0"
 allowfullscreen>
 </iframe>
+</div>
+
+<!-- FOTOS -->
+<div class="slide-ct" style="background-image:url('EscolaBrincando2.png')"></div>
+<div class="slide-ct" style="background-image:url('EscolaAmbiente.png')"></div>
+<div class="slide-ct" style="background-image:url('EscolaBrincando.png')"></div>
+<div class="slide-ct" style="background-image:url('EscolaBrinquedoteca.png')"></div>
+<div class="slide-ct" style="background-image:url('EscolaBriquedoteca2.png')"></div>
+<div class="slide-ct" style="background-image:url('EscolaCrianças.png')"></div>
+<div class="slide-ct" style="background-image:url('EscolaCrinaçasatividade.png')"></div>
 
 </div>
 
@@ -548,6 +602,17 @@ L.marker(c.coords,{icon:iconeLisias})
 .bindPopup(c.nome);
 });
 
+  <script>
+let slidesCT = document.querySelectorAll(".slide-ct");
+let indexCT = 0;
+
+function trocarSlideCT(){
+    slidesCT.forEach(s => s.classList.remove("active"));
+    indexCT = (indexCT + 1) % slidesCT.length;
+    slidesCT[indexCT].classList.add("active");
+}
+
+setInterval(trocarSlideCT, 4000);
 </script>
 
 </body>
