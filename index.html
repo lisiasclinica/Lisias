@@ -2,14 +2,14 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Clínica Lísias – Clínica Psicopedagógica</title>
+  <title>Clínica Lísias – Psicopedagogia em Seberi/RS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Clínica Lísias em Seberi/RS: atendimento psicopedagógico, contraturno escolar, cursos e lançamento do livro sobre ABA.">
+  <meta name="description" content="Clínica Lísias em Seberi/RS: atendimento psicopedagógico, avaliação psicopedagógica, contraturno escolar, orientação familiar, curso para mulheres e lançamento do livro sobre ABA.">
 
   <!-- Ícones -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- Leaflet -->
+  <!-- Leaflet / Mapa -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
@@ -71,8 +71,14 @@
     }
 
     .section-header{
-      max-width:760px;
+      max-width:780px;
       margin-bottom:34px;
+    }
+
+    .section-header.center{
+      margin-left:auto;
+      margin-right:auto;
+      text-align:center;
     }
 
     .eyebrow{
@@ -244,7 +250,7 @@
       color:var(--texto);
       font-weight:700;
       font-size:14px;
-      padding:10px 11px;
+      padding:10px 10px;
       border-radius:999px;
       transition:.2s;
     }
@@ -325,7 +331,7 @@
     }
 
     .hero-copy{
-      max-width:680px;
+      max-width:700px;
     }
 
     .hero-copy .eyebrow{
@@ -337,7 +343,7 @@
     .hero-copy p{
       color:rgba(255,255,255,.86);
       font-size:19px;
-      max-width:620px;
+      max-width:640px;
       margin-bottom:26px;
     }
 
@@ -352,7 +358,7 @@
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:12px;
-      max-width:620px;
+      max-width:650px;
     }
 
     .stat{
@@ -365,7 +371,7 @@
 
     .stat strong{
       display:block;
-      font-size:24px;
+      font-size:17px;
       color:#fff;
       margin-bottom:4px;
     }
@@ -387,7 +393,6 @@
       margin-left:auto;
     }
 
-    /* AJUSTE PRINCIPAL: IMAGEM DO LIVRO SEM CORTAR */
     .hero-card img{
       width:100%;
       height:auto;
@@ -410,7 +415,7 @@
       margin-bottom:18px;
     }
 
-    /* CARDS */
+    /* GRID E CARDS */
 
     .grid{
       display:grid;
@@ -563,6 +568,69 @@
     .list-check i{
       color:var(--dourado);
       margin-top:3px;
+    }
+
+    /* INDICAÇÕES */
+
+    .indicacoes-area{
+      background:#fff;
+      border-top:1px solid rgba(31,95,58,.07);
+      border-bottom:1px solid rgba(31,95,58,.07);
+    }
+
+    .indicacao-card{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      background:linear-gradient(135deg,#fff,rgba(232,243,237,.75));
+    }
+
+    .indicacao-card i{
+      color:var(--dourado);
+      font-size:22px;
+      margin-top:3px;
+    }
+
+    .indicacao-card strong{
+      display:block;
+      color:var(--verde);
+      margin-bottom:6px;
+      font-size:17px;
+    }
+
+    .indicacao-card p{
+      margin:0;
+      font-size:15px;
+    }
+
+    /* COMO FUNCIONA */
+
+    .steps{
+      counter-reset:step;
+    }
+
+    .step-card{
+      position:relative;
+      padding-top:34px;
+    }
+
+    .step-card::before{
+      counter-increment:step;
+      content:counter(step);
+      position:absolute;
+      top:-18px;
+      left:28px;
+      width:46px;
+      height:46px;
+      border-radius:16px;
+      background:var(--dourado);
+      color:var(--verde-escuro);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      font-size:20px;
+      box-shadow:0 10px 22px rgba(212,175,55,.28);
     }
 
     /* CONTRATURNO */
@@ -765,6 +833,138 @@
       margin-bottom:10px;
     }
 
+    /* DEPOIMENTOS */
+
+    .depoimentos-area{
+      background:linear-gradient(135deg, rgba(31,95,58,.08), rgba(212,175,55,.10));
+    }
+
+    .testimonial-card{
+      position:relative;
+    }
+
+    .testimonial-card::before{
+      content:"“";
+      position:absolute;
+      top:8px;
+      right:24px;
+      font-size:78px;
+      color:rgba(212,175,55,.24);
+      font-family:Georgia, serif;
+      line-height:1;
+    }
+
+    .stars{
+      color:var(--dourado);
+      margin-bottom:14px;
+      letter-spacing:2px;
+    }
+
+    .testimonial-card p{
+      color:var(--texto);
+      font-weight:550;
+    }
+
+    .testimonial-card strong{
+      color:var(--verde);
+    }
+
+    /* FAQ */
+
+    .faq-wrap{
+      max-width:920px;
+      margin:0 auto;
+      display:grid;
+      gap:14px;
+    }
+
+    .faq-item{
+      background:#fff;
+      border-radius:20px;
+      box-shadow:var(--sombra-suave);
+      border:1px solid rgba(31,95,58,.08);
+      overflow:hidden;
+    }
+
+    .faq-question{
+      width:100%;
+      border:0;
+      background:transparent;
+      padding:20px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      text-align:left;
+      cursor:pointer;
+      font-size:16px;
+      font-weight:850;
+      color:var(--verde);
+    }
+
+    .faq-question i{
+      transition:.25s;
+      color:var(--dourado);
+    }
+
+    .faq-item.active .faq-question i{
+      transform:rotate(180deg);
+    }
+
+    .faq-answer{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .28s ease;
+    }
+
+    .faq-answer p{
+      padding:0 22px 22px;
+      margin:0;
+    }
+
+    /* CTA FINAL */
+
+    .cta-final{
+      background:var(--verde);
+      color:#fff;
+      border-radius:34px;
+      padding:42px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      box-shadow:var(--sombra);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .cta-final::after{
+      content:"";
+      position:absolute;
+      right:-100px;
+      bottom:-120px;
+      width:300px;
+      height:300px;
+      background:rgba(212,175,55,.18);
+      border-radius:50%;
+    }
+
+    .cta-final h2{
+      color:#fff;
+      margin-bottom:10px;
+    }
+
+    .cta-final p{
+      color:rgba(255,255,255,.82);
+      margin-bottom:0;
+    }
+
+    .cta-final > div,
+    .cta-final > a{
+      position:relative;
+      z-index:2;
+    }
+
     /* MAPA E CONTATO */
 
     .contact-wrap{
@@ -828,16 +1028,71 @@
       line-height:1.5;
     }
 
+    /* RODAPÉ */
+
     footer{
       background:var(--verde-escuro);
       color:#fff;
-      padding:34px 0;
+      padding:52px 0 28px;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.4fr 1fr 1fr;
+      gap:28px;
+      margin-bottom:32px;
+    }
+
+    .footer-brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .footer-brand img{
+      width:42px;
+      height:42px;
+      object-fit:contain;
+      background:#fff;
+      border-radius:14px;
+      padding:6px;
+    }
+
+    footer h3{
+      color:#fff;
+      font-size:18px;
+      margin-bottom:14px;
+    }
+
+    footer p,
+    footer a,
+    footer li{
+      color:rgba(255,255,255,.76);
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    footer ul{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      gap:8px;
+    }
+
+    footer a:hover{
+      color:#fff;
+    }
+
+    .footer-bottom{
+      border-top:1px solid rgba(255,255,255,.12);
+      padding-top:20px;
       text-align:center;
     }
 
-    footer p{
+    .footer-bottom p{
       margin:0;
-      color:rgba(255,255,255,.75);
     }
 
     /* FLUTUANTES */
@@ -896,12 +1151,20 @@
 
     /* RESPONSIVO */
 
+    @media(max-width:1080px){
+      .nav-links a{
+        font-size:13px;
+        padding:9px 8px;
+      }
+    }
+
     @media(max-width:980px){
       .hero-content,
       .professional-wrap,
       .curso-card,
       .livro-box,
-      .contact-wrap{
+      .contact-wrap,
+      .footer-grid{
         grid-template-columns:1fr;
       }
 
@@ -933,6 +1196,11 @@
         max-width:390px;
         margin:auto;
       }
+
+      .cta-final{
+        flex-direction:column;
+        align-items:flex-start;
+      }
     }
 
     @media(max-width:780px){
@@ -956,6 +1224,8 @@
         box-shadow:var(--sombra);
         border:1px solid rgba(31,95,58,.10);
         padding:14px;
+        max-height:calc(100vh - 90px);
+        overflow:auto;
       }
 
       .nav-links.active{
@@ -1017,7 +1287,8 @@
       }
 
       .curso-card,
-      .livro-box{
+      .livro-box,
+      .cta-final{
         padding:24px;
         border-radius:26px;
       }
@@ -1060,11 +1331,12 @@
 
       <div class="nav-links">
         <a href="#sobre">Sobre</a>
-        <a href="#profissional">Profissional</a>
+        <a href="#indicacoes">Indicações</a>
+        <a href="#funcionamento">Como funciona</a>
         <a href="#contraturno">Contraturno</a>
-        <a href="#curso">Curso</a>
         <a href="#livro">Livro</a>
         <a href="#servicos">Serviços</a>
+        <a href="#duvidas">Dúvidas</a>
         <a href="#contato">Contato</a>
         <a href="https://wa.me/55984246260" target="_blank" class="nav-whatsapp">WhatsApp</a>
       </div>
@@ -1082,15 +1354,14 @@
       <div class="hero-copy reveal visible">
         <span class="eyebrow">
           <i class="fa-solid fa-seedling"></i>
-          Atendimento acolhedor e especializado
+          Atendimento psicopedagógico em Seberi/RS
         </span>
 
-        <h1>Cuidando da aprendizagem, do desenvolvimento e da autonomia</h1>
+        <h1>Apoio para aprendizagem, desenvolvimento e autonomia</h1>
 
         <p>
-          Clínica psicopedagógica em Seberi/RS com atendimento para crianças,
-          adolescentes e adultos, contraturno escolar, orientação familiar e projetos
-          de desenvolvimento humano.
+          Atendimento psicopedagógico especializado para crianças, adolescentes e famílias,
+          com foco em aprendizagem, atenção, organização escolar, desenvolvimento e acolhimento.
         </p>
 
         <div class="hero-actions">
@@ -1099,25 +1370,25 @@
             Agendar Atendimento
           </a>
 
-          <a href="#servicos" class="btn btn-light">
-            Conhecer Serviços
+          <a href="#indicacoes" class="btn btn-light">
+            Para quem é indicado?
           </a>
         </div>
 
         <div class="hero-stats">
           <div class="stat">
-            <strong>ABA</strong>
-            <span>Teoria e prática em destaque</span>
+            <strong>Psicopedagogia Clínica</strong>
+            <span>Avaliação e intervenção</span>
           </div>
 
           <div class="stat">
-            <strong>9+</strong>
-            <span>Cidades no mapa de atuação</span>
+            <strong>Contraturno Escolar</strong>
+            <span>Rotina segura e educativa</span>
           </div>
 
           <div class="stat">
-            <strong>100%</strong>
-            <span>Atendimento humanizado</span>
+            <strong>Orientação Familiar</strong>
+            <span>Apoio para pais e responsáveis</span>
           </div>
         </div>
       </div>
@@ -1192,6 +1463,8 @@
         <p>
           A Clínica Lísias oferece atendimento psicopedagógico especializado para crianças,
           adolescentes e adultos com dificuldades de aprendizagem, atenção e desenvolvimento escolar.
+          O objetivo é compreender cada necessidade e construir caminhos para evolução com cuidado,
+          escuta e responsabilidade.
         </p>
       </div>
 
@@ -1218,6 +1491,126 @@
           </div>
           <h3>Família e escola</h3>
           <p>Orientação para que pais, escola e profissionais caminhem juntos no processo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section indicacoes-area" id="indicacoes">
+    <div class="container">
+      <div class="section-header center reveal">
+        <span class="eyebrow">
+          <i class="fa-solid fa-circle-question"></i>
+          Para quem é indicado?
+        </span>
+
+        <h2>Quando procurar atendimento psicopedagógico?</h2>
+
+        <p>
+          O acompanhamento pode ajudar crianças e adolescentes que apresentam dificuldades
+          na aprendizagem, na rotina escolar, na organização, na atenção ou no desenvolvimento.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card indicacao-card reveal">
+          <i class="fa-solid fa-check-circle"></i>
+          <div>
+            <strong>Dificuldades de aprendizagem</strong>
+            <p>Quando há dificuldade em acompanhar conteúdos, tarefas ou atividades escolares.</p>
+          </div>
+        </div>
+
+        <div class="card indicacao-card reveal">
+          <i class="fa-solid fa-check-circle"></i>
+          <div>
+            <strong>Leitura e escrita</strong>
+            <p>Apoio em dificuldades de alfabetização, interpretação, escrita e compreensão.</p>
+          </div>
+        </div>
+
+        <div class="card indicacao-card reveal">
+          <i class="fa-solid fa-check-circle"></i>
+          <div>
+            <strong>Atenção e concentração</strong>
+            <p>Quando a criança apresenta desatenção, agitação ou dificuldade para manter o foco.</p>
+          </div>
+        </div>
+
+        <div class="card indicacao-card reveal">
+          <i class="fa-solid fa-check-circle"></i>
+          <div>
+            <strong>Baixo rendimento escolar</strong>
+            <p>Quando as notas, o interesse ou o desempenho escolar começam a cair.</p>
+          </div>
+        </div>
+
+        <div class="card indicacao-card reveal">
+          <i class="fa-solid fa-check-circle"></i>
+          <div>
+            <strong>Organização e autonomia</strong>
+            <p>Apoio para rotina de estudos, organização de tarefas e responsabilidade escolar.</p>
+          </div>
+        </div>
+
+        <div class="card indicacao-card reveal">
+          <i class="fa-solid fa-check-circle"></i>
+          <div>
+            <strong>Orientação para família</strong>
+            <p>Quando os pais precisam de direcionamento para acompanhar melhor o processo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:34px;" class="reveal">
+        <a href="https://wa.me/55984246260?text=Olá!%20Gostaria%20de%20saber%20se%20o%20atendimento%20psicopedagógico%20é%20indicado%20para%20meu%20caso" target="_blank" class="btn">
+          <i class="fa-brands fa-whatsapp"></i>
+          Tirar dúvidas pelo WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="funcionamento">
+    <div class="container">
+      <div class="section-header center reveal">
+        <span class="eyebrow">
+          <i class="fa-solid fa-route"></i>
+          Como funciona
+        </span>
+
+        <h2>Um processo simples, claro e acolhedor</h2>
+
+        <p>
+          Do primeiro contato ao acompanhamento, cada etapa é conduzida com cuidado
+          para entender a necessidade da criança, adolescente ou família.
+        </p>
+      </div>
+
+      <div class="grid grid-5 steps">
+        <div class="card step-card reveal">
+          <h3>Primeiro contato</h3>
+          <p>Você chama pelo WhatsApp e informa a necessidade inicial.</p>
+        </div>
+
+        <div class="card step-card reveal">
+          <h3>Entendimento do caso</h3>
+          <p>São levantadas as principais dificuldades e objetivos do atendimento.</p>
+        </div>
+
+        <div class="card step-card reveal">
+          <h3>Agendamento</h3>
+          <p>É marcado o horário para avaliação ou atendimento inicial.</p>
+        </div>
+
+        <div class="card step-card reveal">
+          <h3>Plano de acompanhamento</h3>
+          <p>A partir da avaliação, são definidos os melhores caminhos de intervenção.</p>
+        </div>
+
+        <div class="card step-card reveal">
+          <h3>Orientações</h3>
+          <p>A família recebe direcionamentos para apoiar a evolução também em casa.</p>
         </div>
       </div>
     </div>
@@ -1390,27 +1783,27 @@
         <div class="livro-info">
           <span class="eyebrow">
             <i class="fa-solid fa-book-open"></i>
-            Lançamento
+            Lançamento disponível para compra
           </span>
 
           <h2>Análise do Comportamento Aplicada ABA</h2>
           <h3>Teoria e Prática</h3>
 
           <p>
-            Um lançamento especial sobre Análise do Comportamento Aplicada ABA,
-            reunindo teoria e prática em uma obra voltada ao desenvolvimento,
-            aprendizagem e intervenção.
+            Uma obra voltada para profissionais, famílias e pessoas interessadas em compreender
+            melhor a Análise do Comportamento Aplicada ABA, reunindo teoria e prática em uma
+            abordagem acessível e aplicada.
           </p>
 
           <p>
-            Garanta o seu exemplar pelo botão abaixo. Você será direcionado para a
-            página oficial de compra da Literare Books.
+            Garanta o seu exemplar pelo botão abaixo. Você será direcionado para a página oficial
+            de compra da Literare Books.
           </p>
 
           <div class="livro-botoes">
             <a href="https://loja.literarebooks.com.br/autoajuda/analise-do-comportamento-aplicada-aba-teoria-e-pratica?parceiro=13988" target="_blank" class="btn">
               <i class="fa-solid fa-cart-shopping"></i>
-              Comprar Livro
+              Comprar agora
             </a>
 
             <a href="https://wa.me/55984246260?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20livro%20Análise%20do%20Comportamento%20Aplicada%20ABA" target="_blank" class="btn btn-secondary">
@@ -1434,11 +1827,12 @@
         <h2>Atendimentos e acompanhamentos</h2>
 
         <p>
-          Serviços voltados à aprendizagem, desenvolvimento escolar e orientação familiar.
+          Serviços voltados à aprendizagem, desenvolvimento escolar, orientação familiar,
+          apoio pedagógico e desenvolvimento humano.
         </p>
       </div>
 
-      <div class="grid grid-4">
+      <div class="grid grid-3">
         <div class="card service-card reveal">
           <div class="icon">
             <i class="fa-solid fa-clipboard-check"></i>
@@ -1470,6 +1864,182 @@
           <strong>Acompanhamento Escolar</strong>
           <p>Suporte para desenvolvimento acadêmico, atenção, autonomia e desempenho.</p>
         </div>
+
+        <div class="card service-card reveal">
+          <div class="icon">
+            <i class="fa-solid fa-school"></i>
+          </div>
+          <strong>Contraturno Escolar</strong>
+          <p>Rotina educativa, atividades complementares, apoio escolar e acolhimento.</p>
+        </div>
+
+        <div class="card service-card reveal">
+          <div class="icon">
+            <i class="fa-solid fa-chalkboard-user"></i>
+          </div>
+          <strong>Cursos e Formações</strong>
+          <p>Projetos, cursos e conteúdos voltados ao desenvolvimento pessoal e profissional.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section depoimentos-area" id="depoimentos">
+    <div class="container">
+      <div class="section-header center reveal">
+        <span class="eyebrow">
+          <i class="fa-solid fa-star"></i>
+          Depoimentos
+        </span>
+
+        <h2>Quem conhece, recomenda</h2>
+
+        <p>
+          Espaço para destacar a experiência de famílias e pessoas que já conheceram
+          o trabalho da Clínica Lísias.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>
+            Excelente atendimento, com muito carinho, atenção e profissionalismo.
+          </p>
+          <strong>Família atendida</strong>
+        </div>
+
+        <div class="card testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>
+            O contraturno ajudou muito na organização da rotina escolar e no desenvolvimento.
+          </p>
+          <strong>Responsável por aluno</strong>
+        </div>
+
+        <div class="card testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>
+            Ambiente acolhedor, seguro e preparado para receber as crianças com cuidado.
+          </p>
+          <strong>Depoimento de família</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="duvidas">
+    <div class="container">
+      <div class="section-header center reveal">
+        <span class="eyebrow">
+          <i class="fa-solid fa-comments"></i>
+          Dúvidas frequentes
+        </span>
+
+        <h2>Perguntas comuns antes de agendar</h2>
+
+        <p>
+          Veja algumas respostas rápidas sobre atendimento, contraturno e contato.
+        </p>
+      </div>
+
+      <div class="faq-wrap reveal">
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            Quando procurar uma psicopedagoga?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Quando a criança ou adolescente apresenta dificuldades de aprendizagem,
+              desatenção, baixo rendimento escolar, dificuldades de leitura, escrita,
+              organização ou necessidade de apoio na rotina escolar.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            Como funciona o primeiro atendimento?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              O primeiro contato pode ser feito pelo WhatsApp. A partir disso, são entendidas
+              as necessidades e é realizado o agendamento para avaliação ou orientação inicial.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            A clínica atende crianças de qual idade?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              O atendimento é voltado principalmente para crianças e adolescentes, mas também
+              pode contemplar adultos conforme a necessidade apresentada.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            Como funciona o contraturno escolar?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              O contraturno oferece um ambiente seguro e acolhedor, com apoio escolar,
+              atividades lúdicas, desenvolvimento socioemocional e rotina estruturada.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            Precisa agendar horário?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Sim. O ideal é entrar em contato pelo WhatsApp para verificar disponibilidade
+              e agendar o melhor horário para atendimento.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" type="button">
+            Onde fica localizada a Clínica Lísias?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              A Clínica Lísias está localizada na Rua Bento Gonçalves, 200 – Centro,
+              em Seberi/RS.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-final reveal">
+        <div>
+          <h2>Quer entender qual atendimento é ideal?</h2>
+          <p>
+            Chame no WhatsApp e fale com a Clínica Lísias para receber orientação inicial.
+          </p>
+        </div>
+
+        <a href="https://wa.me/55984246260?text=Olá!%20Gostaria%20de%20entender%20qual%20atendimento%20é%20mais%20indicado%20para%20meu%20caso" target="_blank" class="btn">
+          <i class="fa-brands fa-whatsapp"></i>
+          Conversar agora
+        </a>
       </div>
     </div>
   </section>
@@ -1538,7 +2108,48 @@
 
   <footer>
     <div class="container">
-      <p>© 2026 – Clínica Lísias. Todos os direitos reservados.</p>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <img src="lisias-logo.png" alt="Clínica Lísias">
+            <div>
+              <h3 style="margin:0;">Clínica Lísias</h3>
+              <p style="margin:0;">Psicopedagogia e Desenvolvimento</p>
+            </div>
+          </div>
+
+          <p>
+            Atendimento psicopedagógico, orientação familiar, contraturno escolar,
+            cursos e projetos voltados ao desenvolvimento humano.
+          </p>
+        </div>
+
+        <div>
+          <h3>Links rápidos</h3>
+          <ul>
+            <li><a href="#sobre">Sobre a clínica</a></li>
+            <li><a href="#indicacoes">Para quem é indicado</a></li>
+            <li><a href="#funcionamento">Como funciona</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#duvidas">Dúvidas frequentes</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Contato</h3>
+          <ul>
+            <li>Rua Bento Gonçalves, 200 – Centro</li>
+            <li>Seberi/RS</li>
+            <li><a href="https://wa.me/55984246260" target="_blank">(55) 98424-6260</a></li>
+            <li><a href="mailto:lisiasseberi@gmail.com">lisiasseberi@gmail.com</a></li>
+            <li><a href="https://www.instagram.com/clinicalisias" target="_blank">@clinicalisias</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 – Clínica Lísias. Todos os direitos reservados.</p>
+      </div>
     </div>
   </footer>
 
@@ -1668,6 +2279,28 @@
 
       reveals.forEach(function(item){
         observer.observe(item);
+      });
+
+      const faqItems = document.querySelectorAll(".faq-item");
+
+      faqItems.forEach(function(item){
+        const question = item.querySelector(".faq-question");
+        const answer = item.querySelector(".faq-answer");
+
+        question.addEventListener("click", function(){
+          const isActive = item.classList.contains("active");
+
+          faqItems.forEach(function(otherItem){
+            const otherAnswer = otherItem.querySelector(".faq-answer");
+            otherItem.classList.remove("active");
+            otherAnswer.style.maxHeight = null;
+          });
+
+          if(!isActive){
+            item.classList.add("active");
+            answer.style.maxHeight = answer.scrollHeight + "px";
+          }
+        });
       });
 
       const mapElement = document.getElementById("map");
