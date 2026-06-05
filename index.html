@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Clínica Lísias – Clínica Psicopedagógica</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Clínica Lísias em Seberi/RS: atendimento psicopedagógico, contraturno escolar, cursos e lançamento do livro sobre ABA.">
 
   <!-- Ícones -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -13,244 +14,547 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
   <style>
-    /* =====================
-       BASE
-    ===================== */
-    *{
-      box-sizing:border-box;
+    :root{
+      --verde:#1f5f3a;
+      --verde-escuro:#123d27;
+      --verde-claro:#e8f3ed;
+      --dourado:#d4af37;
+      --dourado-claro:#fff5d8;
+      --texto:#26332c;
+      --muted:#66736b;
+      --branco:#ffffff;
+      --fundo:#f5f7f4;
+      --sombra:0 18px 45px rgba(18,61,39,.12);
+      --sombra-suave:0 10px 28px rgba(18,61,39,.10);
+      --radius:24px;
     }
 
-    html{
-      scroll-behavior:smooth;
-    }
+    *{ box-sizing:border-box; }
+
+    html{ scroll-behavior:smooth; }
 
     body{
       margin:0;
       font-family:'Segoe UI', Arial, sans-serif;
-      background:#f4f6f8;
-      color:#333;
+      color:var(--texto);
+      background:
+        radial-gradient(circle at top left, rgba(212,175,55,.18), transparent 32%),
+        radial-gradient(circle at top right, rgba(31,95,58,.14), transparent 34%),
+        var(--fundo);
     }
 
-    a{
-      text-decoration:none;
+    body.menu-open{ overflow:hidden; }
+
+    a{ text-decoration:none; }
+    img, iframe{ max-width:100%; }
+
+    .container{
+      max-width:1180px;
+      margin:0 auto;
+      padding:0 22px;
     }
 
-    img,
-    iframe{
-      max-width:100%;
+    .section{
+      padding:86px 0;
     }
 
-    /* =====================
-       MENU
-    ===================== */
+    .section-header{
+      max-width:760px;
+      margin-bottom:34px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:var(--dourado-claro);
+      color:var(--verde);
+      padding:8px 14px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:13px;
+      letter-spacing:.02em;
+      margin-bottom:14px;
+    }
+
+    h1,h2,h3,p{ margin-top:0; }
+
+    h1{
+      font-size:clamp(36px, 5vw, 64px);
+      line-height:1.03;
+      margin-bottom:18px;
+      color:#fff;
+      letter-spacing:-.04em;
+    }
+
+    h2{
+      color:var(--verde);
+      font-size:clamp(28px, 3.5vw, 44px);
+      line-height:1.1;
+      margin-bottom:16px;
+      letter-spacing:-.03em;
+    }
+
+    h3{
+      color:var(--verde);
+      font-size:22px;
+      margin-bottom:12px;
+    }
+
+    p{
+      line-height:1.72;
+      color:var(--muted);
+      font-size:16.5px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:48px;
+      padding:13px 24px;
+      border-radius:999px;
+      font-weight:800;
+      border:0;
+      cursor:pointer;
+      transition:.25s ease;
+      background:var(--dourado);
+      color:var(--verde-escuro);
+      box-shadow:0 10px 22px rgba(212,175,55,.25);
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 16px 30px rgba(212,175,55,.35);
+    }
+
+    .btn-secondary{
+      background:var(--verde);
+      color:#fff;
+      box-shadow:0 10px 22px rgba(31,95,58,.22);
+    }
+
+    .btn-light{
+      background:#fff;
+      color:var(--verde);
+      box-shadow:0 10px 22px rgba(0,0,0,.12);
+    }
+
+    /* MENU */
     nav{
       position:sticky;
       top:0;
-      background:#fff;
-      box-shadow:0 2px 8px rgba(0,0,0,.08);
       z-index:1000;
+      backdrop-filter:blur(16px);
+      background:rgba(255,255,255,.88);
+      border-bottom:1px solid rgba(31,95,58,.09);
     }
 
     .nav-container{
-      max-width:1100px;
+      max-width:1180px;
       margin:auto;
-      padding:12px 20px;
+      padding:14px 22px;
       display:flex;
-      justify-content:space-between;
       align-items:center;
-      gap:16px;
+      justify-content:space-between;
+      gap:18px;
     }
 
-    .nav-logo{
-      font-weight:bold;
-      color:#1f5f3a;
-      font-size:18px;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:var(--verde);
+      font-weight:900;
+      letter-spacing:-.02em;
       white-space:nowrap;
+    }
+
+    .brand-mark{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--verde),#3d8c61);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      box-shadow:0 10px 20px rgba(31,95,58,.24);
+      overflow:hidden;
+    }
+
+    .brand-mark img{
+      width:30px;
+      height:30px;
+      object-fit:contain;
+    }
+
+    .brand-text span{
+      display:block;
+      font-size:17px;
+      line-height:1.1;
+    }
+
+    .brand-text small{
+      display:block;
+      color:var(--muted);
+      font-weight:600;
+      font-size:12px;
+      margin-top:2px;
     }
 
     .menu-toggle{
       display:none;
-      font-size:26px;
-      background:none;
-      border:none;
-      color:#1f5f3a;
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      border:1px solid rgba(31,95,58,.12);
+      background:#fff;
+      color:var(--verde);
+      font-size:22px;
       cursor:pointer;
-      line-height:1;
     }
 
     .nav-links{
       display:flex;
       align-items:center;
-      gap:20px;
+      gap:6px;
     }
 
     .nav-links a{
-      color:#333;
-      font-weight:500;
+      color:var(--texto);
+      font-weight:700;
+      font-size:14px;
+      padding:10px 11px;
+      border-radius:999px;
+      transition:.2s;
     }
 
     .nav-links a:hover{
-      color:#1f5f3a;
+      color:var(--verde);
+      background:var(--verde-claro);
     }
 
-    .nav-whatsapp{
-      background:#d4af37;
-      color:#1f5f3a !important;
-      padding:7px 16px;
-      border-radius:20px;
-      font-weight:bold;
+    .nav-links .nav-whatsapp{
+      background:var(--dourado);
+      color:var(--verde-escuro);
+      padding:10px 16px;
+      margin-left:4px;
     }
 
-    /* =====================
-       HERO
-    ===================== */
-    .hero-slider{
+    /* HERO */
+    .hero{
       position:relative;
-      height:420px;
+      min-height:670px;
       overflow:hidden;
+      color:#fff;
+      isolation:isolate;
     }
 
-    .slides,
-    .slide{
+    .hero-slider,
+    .hero-slide{
       position:absolute;
       inset:0;
     }
 
-    .slide{
+    .hero-slide{
       background-size:cover;
       background-position:center;
       opacity:0;
-      transition:opacity 1s ease;
+      transform:scale(1.04);
+      transition:opacity 1.2s ease, transform 5s ease;
     }
 
-    .slide.active{
+    .hero-slide.active{
       opacity:1;
+      transform:scale(1);
     }
 
-    .hero-slider::after{
+    .hero::before{
       content:"";
       position:absolute;
       inset:0;
-      background:rgba(0,0,0,.45);
+      background:
+        linear-gradient(90deg, rgba(18,61,39,.92), rgba(18,61,39,.62) 48%, rgba(18,61,39,.22)),
+        linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,.08));
       z-index:1;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      right:-120px;
+      bottom:-160px;
+      width:520px;
+      height:520px;
+      background:rgba(212,175,55,.20);
+      border-radius:50%;
+      z-index:1;
+      filter:blur(2px);
     }
 
     .hero-content{
       position:relative;
       z-index:2;
-      text-align:center;
-      color:#fff;
-      top:50%;
-      transform:translateY(-50%);
-      padding:0 20px;
-    }
-
-    .hero-content h1{
-      font-size:42px;
-      margin:0 0 10px;
-    }
-
-    .hero-content p{
-      font-size:18px;
-      margin:0;
-    }
-
-    .btn{
-      display:inline-block;
-      margin-top:20px;
-      padding:12px 30px;
-      background:#d4af37;
-      color:#1f5f3a;
-      border-radius:30px;
-      font-weight:bold;
-      transition:.3s;
-    }
-
-    .btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 6px 14px rgba(0,0,0,.18);
-    }
-
-    .btn-secundario{
-      background:#1f5f3a;
-      color:#fff;
-    }
-
-    /* =====================
-       SEÇÕES
-    ===================== */
-    section{
-      max-width:1100px;
-      margin:auto;
-      padding:70px 20px;
-    }
-
-    h2{
-      color:#1f5f3a;
-      margin:0 0 20px;
-      font-size:30px;
-    }
-
-    p{
-      line-height:1.6;
-      font-size:16px;
-    }
-
-    /* =====================
-       CARDS
-    ===================== */
-    .cards{
+      min-height:670px;
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:25px;
+      grid-template-columns:1.08fr .92fr;
+      align-items:center;
+      gap:42px;
+      padding:82px 22px 70px;
     }
+
+    .hero-copy{
+      max-width:680px;
+    }
+
+    .hero-copy .eyebrow{
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.22);
+    }
+
+    .hero-copy p{
+      color:rgba(255,255,255,.86);
+      font-size:19px;
+      max-width:620px;
+      margin-bottom:26px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:34px;
+    }
+
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      max-width:620px;
+    }
+
+    .stat{
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.12);
+      backdrop-filter:blur(10px);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:24px;
+      color:#fff;
+      margin-bottom:4px;
+    }
+
+    .stat span{
+      color:rgba(255,255,255,.76);
+      font-size:13px;
+      font-weight:600;
+    }
+
+    .hero-card{
+      background:rgba(255,255,255,.92);
+      color:var(--texto);
+      border-radius:32px;
+      padding:26px;
+      box-shadow:var(--sombra);
+      border:1px solid rgba(255,255,255,.7);
+      max-width:430px;
+      margin-left:auto;
+    }
+
+    .hero-card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      border-radius:22px;
+      display:block;
+      margin-bottom:18px;
+      background:#e5e9e6;
+    }
+
+    .hero-card h3{
+      margin-bottom:8px;
+    }
+
+    .hero-card p{
+      color:var(--muted);
+      font-size:15px;
+      margin-bottom:18px;
+    }
+
+    /* CARDS */
+    .grid{
+      display:grid;
+      gap:22px;
+    }
+
+    .grid-2{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .grid-3{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .grid-4{ grid-template-columns:repeat(4,minmax(0,1fr)); }
 
     .card{
       background:#fff;
-      padding:25px;
-      border-radius:12px;
-      box-shadow:0 6px 16px rgba(0,0,0,.08);
-      line-height:1.5;
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:var(--sombra-suave);
+      border:1px solid rgba(31,95,58,.07);
+      transition:.25s ease;
     }
 
-    /* =====================
-       VÍDEOS
-    ===================== */
-    .video-box{
-      max-width:450px;
-      margin:auto;
-      border-radius:16px;
+    .card:hover{
+      transform:translateY(-4px);
+      box-shadow:var(--sombra);
+    }
+
+    .icon{
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--verde-claro);
+      color:var(--verde);
+      font-size:23px;
+      margin-bottom:18px;
+    }
+
+    .about-card{
+      position:relative;
       overflow:hidden;
-      box-shadow:0 6px 16px rgba(0,0,0,.12);
-      background:#000;
     }
 
-    .video-box iframe{
-      width:100%;
-      height:700px;
-      border:0;
+    .about-card::after{
+      content:"";
+      position:absolute;
+      width:160px;
+      height:160px;
+      right:-60px;
+      bottom:-60px;
+      border-radius:50%;
+      background:rgba(212,175,55,.14);
+    }
+
+    .highlight-strip{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+      margin-top:-38px;
+      position:relative;
+      z-index:3;
+    }
+
+    .strip-item{
+      background:#fff;
+      border-radius:22px;
+      padding:20px;
+      box-shadow:var(--sombra);
+      border:1px solid rgba(31,95,58,.08);
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+
+    .strip-item i{
+      color:var(--dourado);
+      font-size:24px;
+      margin-top:2px;
+    }
+
+    .strip-item strong{
       display:block;
+      color:var(--verde);
+      margin-bottom:4px;
     }
 
-    /* =====================
-       SLIDER CONTRATURNO
-    ===================== */
+    .strip-item span{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    /* PROFISSIONAL */
+    .professional-wrap{
+      display:grid;
+      grid-template-columns:.92fr 1.08fr;
+      gap:34px;
+      align-items:center;
+    }
+
+    .video-card{
+      background:#fff;
+      padding:16px;
+      border-radius:28px;
+      box-shadow:var(--sombra);
+      border:1px solid rgba(31,95,58,.08);
+    }
+
+    .video-frame{
+      position:relative;
+      width:100%;
+      padding-top:145%;
+      background:#000;
+      border-radius:20px;
+      overflow:hidden;
+    }
+
+    .video-frame iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .list-check{
+      list-style:none;
+      padding:0;
+      margin:22px 0 0;
+      display:grid;
+      gap:12px;
+    }
+
+    .list-check li{
+      display:flex;
+      gap:10px;
+      color:var(--texto);
+      font-weight:650;
+    }
+
+    .list-check i{
+      color:var(--dourado);
+      margin-top:3px;
+    }
+
+    /* CONTRATURNO */
+    .contraturno-area{
+      background:linear-gradient(135deg, rgba(31,95,58,.08), rgba(212,175,55,.12));
+      border-top:1px solid rgba(31,95,58,.06);
+      border-bottom:1px solid rgba(31,95,58,.06);
+    }
+
     .slider-contraturno{
       position:relative;
       width:100%;
-      height:400px;
-      margin:30px auto;
-      border-radius:15px;
+      height:480px;
+      margin:24px auto 34px;
+      border-radius:30px;
       overflow:hidden;
-      background:#ddd;
-      box-shadow:0 6px 16px rgba(0,0,0,.10);
+      background:#dfe6df;
+      box-shadow:var(--sombra);
     }
 
     .slide-ct{
       position:absolute;
       inset:0;
       opacity:0;
-      transition:opacity 1s ease;
+      transition:opacity .85s ease;
       background-size:cover;
       background-position:center;
       pointer-events:none;
@@ -262,287 +566,408 @@
       z-index:2;
     }
 
+    .slide-ct::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(0deg, rgba(18,61,39,.38), transparent 55%);
+      pointer-events:none;
+    }
+
     .slide-ct iframe{
       width:100%;
       height:100%;
       border:0;
       display:block;
       background:#000;
+      position:relative;
+      z-index:2;
     }
 
     .btn-video{
       position:absolute;
-      bottom:20px;
+      bottom:22px;
       left:50%;
       transform:translateX(-50%);
-      background:#d4af37;
-      color:#1f5f3a;
-      padding:10px 20px;
-      border-radius:20px;
-      font-weight:bold;
-      z-index:4;
+      z-index:5;
+      background:var(--dourado);
+      color:var(--verde-escuro);
+      padding:12px 20px;
+      border-radius:999px;
+      font-weight:800;
       white-space:nowrap;
+      box-shadow:0 10px 24px rgba(0,0,0,.18);
     }
 
-    .prev,
-    .next{
+    .slider-btn{
       position:absolute;
       top:50%;
       transform:translateY(-50%);
-      background:rgba(0,0,0,.5);
-      color:#fff;
-      border:none;
-      width:42px;
-      height:42px;
-      font-size:22px;
-      cursor:pointer;
-      z-index:5;
+      width:48px;
+      height:48px;
+      border:0;
       border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      background:rgba(255,255,255,.88);
+      color:var(--verde);
+      font-size:22px;
+      z-index:6;
+      cursor:pointer;
+      box-shadow:0 10px 24px rgba(0,0,0,.16);
     }
 
-    .prev{
-      left:10px;
+    .slider-btn:hover{
+      background:var(--verde);
+      color:#fff;
     }
 
-    .next{
-      right:10px;
-    }
+    .prev{ left:18px; }
+    .next{ right:18px; }
 
-    .prev:hover,
-    .next:hover{
-      background:#1f5f3a;
-    }
-
-    /* =====================
-       LIVRO
-    ===================== */
-    .livro-section{
-      max-width:1100px;
-    }
-
-    .livro-box{
-      background:#fff;
-      border-radius:20px;
-      padding:34px;
+    /* CURSO */
+    .curso-card{
       display:grid;
-      grid-template-columns:330px 1fr;
+      grid-template-columns:1fr 380px;
       gap:32px;
       align-items:center;
-      box-shadow:0 8px 24px rgba(0,0,0,.10);
-      border-left:6px solid #d4af37;
+      background:var(--verde);
+      color:#fff;
+      border-radius:32px;
+      padding:34px;
+      overflow:hidden;
+      position:relative;
+      box-shadow:var(--sombra);
+    }
+
+    .curso-card::after{
+      content:"";
+      position:absolute;
+      right:-90px;
+      top:-90px;
+      width:260px;
+      height:260px;
+      border-radius:50%;
+      background:rgba(212,175,55,.20);
+    }
+
+    .curso-card h2,
+    .curso-card p{
+      color:#fff;
+    }
+
+    .curso-card p{
+      color:rgba(255,255,255,.82);
+    }
+
+    .curso-card .video-card{
+      position:relative;
+      z-index:2;
+    }
+
+    /* LIVRO */
+    .livro-box{
+      background:#fff;
+      border-radius:34px;
+      padding:36px;
+      display:grid;
+      grid-template-columns:360px 1fr;
+      gap:36px;
+      align-items:center;
+      box-shadow:var(--sombra);
+      border:1px solid rgba(31,95,58,.08);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .livro-box::before{
+      content:"";
+      position:absolute;
+      inset:0 0 auto auto;
+      width:44%;
+      height:100%;
+      background:linear-gradient(135deg, transparent, rgba(212,175,55,.10));
+      pointer-events:none;
     }
 
     .livro-capa{
-      width:100%;
-      border-radius:16px;
+      position:relative;
+      z-index:2;
+      border-radius:24px;
       overflow:hidden;
-      background:#f4f6f8;
-      box-shadow:0 8px 18px rgba(0,0,0,.18);
+      box-shadow:0 24px 40px rgba(0,0,0,.18);
+      background:#eef2ee;
+      transform:rotate(-1.5deg);
     }
 
     .livro-capa img{
       width:100%;
-      height:auto;
       display:block;
     }
 
-    .livro-tag{
-      display:inline-block;
-      background:#f5ead0;
-      color:#1f5f3a;
-      padding:7px 14px;
-      border-radius:999px;
-      font-weight:bold;
-      margin-bottom:12px;
-      font-size:14px;
-    }
-
-    .livro-info h2{
-      margin-bottom:12px;
-    }
-
-    .livro-info h3{
-      color:#1f5f3a;
-      font-size:22px;
-      margin:0 0 15px;
-    }
-
-    .livro-info p{
-      margin-bottom:14px;
+    .livro-info{
+      position:relative;
+      z-index:2;
     }
 
     .livro-botoes{
       display:flex;
-      gap:12px;
       flex-wrap:wrap;
-      margin-top:18px;
+      gap:12px;
+      margin-top:24px;
     }
 
-    /* =====================
-       MAPA
-    ===================== */
+    /* SERVIÇOS */
+    .service-card strong{
+      color:var(--verde);
+      font-size:18px;
+      display:block;
+      margin-bottom:10px;
+    }
+
+    /* MAPA E CONTATO */
+    .contact-wrap{
+      display:grid;
+      grid-template-columns:1fr 380px;
+      gap:28px;
+      align-items:stretch;
+    }
+
     #map{
-      height:500px;
-      border-radius:20px;
+      width:100%;
+      min-height:520px;
+      border-radius:30px;
       overflow:hidden;
-      box-shadow:0 6px 16px rgba(0,0,0,.10);
+      box-shadow:var(--sombra);
+      border:1px solid rgba(31,95,58,.08);
+      background:#dfe6df;
     }
 
-    /* =====================
-       FOOTER
-    ===================== */
+    .contact-card{
+      background:#fff;
+      border-radius:30px;
+      padding:30px;
+      box-shadow:var(--sombra);
+      border:1px solid rgba(31,95,58,.08);
+    }
+
+    .contact-line{
+      display:flex;
+      gap:13px;
+      align-items:flex-start;
+      padding:16px 0;
+      border-bottom:1px solid rgba(31,95,58,.09);
+    }
+
+    .contact-line:last-child{ border-bottom:0; }
+
+    .contact-line i{
+      width:42px;
+      height:42px;
+      flex:0 0 42px;
+      border-radius:15px;
+      background:var(--verde-claro);
+      color:var(--verde);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .contact-line strong{
+      display:block;
+      color:var(--verde);
+      margin-bottom:3px;
+    }
+
+    .contact-line span,
+    .contact-line a{
+      color:var(--muted);
+      line-height:1.5;
+    }
+
     footer{
-      background:#1f5f3a;
+      background:var(--verde-escuro);
       color:#fff;
+      padding:34px 0;
       text-align:center;
-      padding:25px;
     }
 
-    /* =====================
-       BOTÕES FLUTUANTES
-    ===================== */
-    .float-btn,
-    .insta-float{
+    footer p{
+      margin:0;
+      color:rgba(255,255,255,.75);
+    }
+
+    /* FLUTUANTES */
+    .float-stack{
       position:fixed;
-      right:20px;
-      width:55px;
-      height:55px;
+      right:18px;
+      bottom:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      z-index:999;
+    }
+
+    .float-btn{
+      width:56px;
+      height:56px;
       border-radius:50%;
       display:flex;
       align-items:center;
       justify-content:center;
       color:#fff;
-      font-size:22px;
-      box-shadow:0 4px 12px rgba(0,0,0,.25);
-      z-index:999;
-      transition:.3s;
+      font-size:23px;
+      box-shadow:0 12px 26px rgba(0,0,0,.22);
+      transition:.25s;
     }
 
-    .float-btn:hover,
-    .insta-float:hover{
-      transform:scale(1.1);
+    .float-btn:hover{ transform:scale(1.08); }
+    .float-whatsapp{ background:#25D366; }
+    .float-maps{ background:var(--verde); }
+    .float-insta{ background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); }
+
+    /* REVEAL */
+    .reveal{
+      opacity:0;
+      transform:translateY(18px);
+      transition:.7s ease;
     }
 
-    .float-whatsapp{
-      bottom:20px;
-      background:#25D366;
+    .reveal.visible{
+      opacity:1;
+      transform:translateY(0);
     }
 
-    .float-maps{
-      bottom:90px;
-      background:#1f5f3a;
+    @media(max-width:980px){
+      .hero-content,
+      .professional-wrap,
+      .curso-card,
+      .livro-box,
+      .contact-wrap{
+        grid-template-columns:1fr;
+      }
+
+      .hero{
+        min-height:auto;
+      }
+
+      .hero-content{
+        min-height:auto;
+        padding-top:70px;
+      }
+
+      .hero-card{
+        max-width:100%;
+        margin-left:0;
+      }
+
+      .grid-3,
+      .grid-4,
+      .highlight-strip{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+
+      .curso-card .video-card{
+        max-width:430px;
+      }
+
+      .livro-capa{
+        max-width:390px;
+        margin:auto;
+      }
     }
 
-    .insta-float{
-      bottom:160px;
-      background:#E1306C;
-      font-size:24px;
-    }
-
-    /* =====================
-       MOBILE
-    ===================== */
-    @media(max-width:768px){
+    @media(max-width:780px){
       .nav-container{
-        flex-wrap:wrap;
+        padding:12px 16px;
       }
 
       .menu-toggle{
         display:block;
-        margin-left:auto;
       }
 
       .nav-links{
+        position:fixed;
+        inset:68px 14px auto 14px;
         display:none;
         flex-direction:column;
-        align-items:flex-start;
-        width:100%;
-        gap:0;
-        padding:10px 0 4px;
-        border-top:1px solid #eee;
+        align-items:stretch;
+        gap:4px;
+        background:#fff;
+        border-radius:22px;
+        box-shadow:var(--sombra);
+        border:1px solid rgba(31,95,58,.10);
+        padding:14px;
       }
 
-      .nav-links.active{
-        display:flex;
-      }
+      .nav-links.active{ display:flex; }
 
       .nav-links a{
-        width:100%;
-        padding:12px 0;
+        padding:13px 14px;
+        font-size:15px;
       }
 
-      .nav-whatsapp{
+      .nav-links .nav-whatsapp{
         text-align:center;
-        padding:10px 16px !important;
+        margin-left:0;
       }
 
-      .hero-slider{
-        height:320px;
+      .hero-content{
+        padding:58px 18px 48px;
       }
 
-      .hero-content h1{
-        font-size:28px;
+      .hero-actions .btn{
+        width:100%;
       }
 
-      .hero-content p{
-        font-size:16px;
+      .hero-stats,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .highlight-strip{
+        grid-template-columns:1fr;
       }
 
-      section{
-        padding:50px 18px;
+      .hero-card img{
+        height:190px;
       }
 
-      h2{
-        font-size:25px;
+      .section{
+        padding:62px 0;
       }
 
       .slider-contraturno{
-        height:280px;
+        height:310px;
+        border-radius:24px;
       }
 
-      .video-box iframe{
-        height:560px;
+      .slider-btn{
+        width:42px;
+        height:42px;
       }
 
+      .btn-video{
+        font-size:13px;
+        padding:10px 14px;
+      }
+
+      .curso-card,
       .livro-box{
-        grid-template-columns:1fr;
         padding:24px;
-      }
-
-      .livro-capa{
-        max-width:360px;
-        margin:auto;
-      }
-
-      .livro-botoes .btn{
-        width:100%;
-        text-align:center;
+        border-radius:26px;
       }
 
       #map{
-        height:380px;
+        min-height:390px;
       }
 
-      .float-btn,
-      .insta-float{
-        right:14px;
+      .float-stack{
+        right:13px;
+        bottom:13px;
+      }
+
+      .float-btn{
         width:50px;
         height:50px;
-      }
-
-      .float-whatsapp{
-        bottom:15px;
-      }
-
-      .float-maps{
-        bottom:78px;
-      }
-
-      .insta-float{
-        bottom:141px;
+        font-size:20px;
       }
     }
   </style>
@@ -552,347 +977,484 @@
 
   <nav>
     <div class="nav-container">
-      <div class="nav-logo">Clínica Lísias</div>
+      <a class="brand" href="#inicio" aria-label="Voltar ao início">
+        <span class="brand-mark">
+          <img src="lisias-logo.png" alt="">
+        </span>
+        <span class="brand-text">
+          <span>Clínica Lísias</span>
+          <small>Psicopedagogia e Desenvolvimento</small>
+        </span>
+      </a>
 
-      <button class="menu-toggle" type="button" aria-label="Abrir menu">☰</button>
+      <button class="menu-toggle" type="button" aria-label="Abrir menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
       <div class="nav-links">
         <a href="#sobre">Sobre</a>
-        <a href="#servicos">Serviços</a>
         <a href="#profissional">Profissional</a>
         <a href="#contraturno">Contraturno</a>
         <a href="#curso">Curso</a>
         <a href="#livro">Livro</a>
+        <a href="#servicos">Serviços</a>
         <a href="#contato">Contato</a>
         <a href="https://wa.me/55984246260" target="_blank" class="nav-whatsapp">WhatsApp</a>
       </div>
     </div>
   </nav>
 
-  <div class="hero-slider">
-    <div class="slides">
-      <div class="slide active" style="background-image:url('clinica1.jpg')"></div>
-      <div class="slide" style="background-image:url('clinica2.jpg')"></div>
-      <div class="slide" style="background-image:url('clinica3.jpg')"></div>
+  <header class="hero" id="inicio">
+    <div class="hero-slider">
+      <div class="hero-slide active" style="background-image:url('clinica1.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('clinica2.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('clinica3.jpg')"></div>
     </div>
 
-    <div class="hero-content">
-      <h1>Clínica Psicopedagógica</h1>
-      <p>Cuidando do desenvolvimento e da aprendizagem</p>
-      <a href="#contato" class="btn">Agendar Atendimento</a>
-    </div>
-  </div>
-
-  <section id="sobre">
-    <h2>Sobre a Clínica</h2>
-    <p>
-      A Clínica Lísias oferece atendimento psicopedagógico especializado para crianças,
-      adolescentes e adultos com dificuldades de aprendizagem.
-    </p>
-  </section>
-
-  <section id="profissional">
-    <h2>Sobre a Profissional</h2>
-
-    <p>
-      A Clínica Lísias é conduzida por profissionais especializados em Psicopedagogia
-      Clínica e Institucional, com experiência no acompanhamento de crianças e adolescentes
-      com dificuldades de aprendizagem, atenção e desenvolvimento escolar.
-    </p>
-
-    <div class="video-box">
-      <iframe
-        src="https://www.youtube.com/embed/zDge0G4eDYQ"
-        title="Apresentação da Clínica Lísias"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </section>
-
-  <section id="contraturno">
-    <h2>Escola de Contraturno</h2>
-
-    <p>
-      Nosso contraturno escolar oferece um ambiente seguro, acolhedor e educativo,
-      proporcionando apoio pedagógico, desenvolvimento socioemocional e atividades
-      complementares para crianças em idade escolar.
-    </p>
-
-    <div class="slider-contraturno">
-      <button class="prev" type="button" aria-label="Slide anterior">&#10094;</button>
-      <button class="next" type="button" aria-label="Próximo slide">&#10095;</button>
-
-      <div class="slide-ct active">
-        <iframe
-          src="https://www.youtube.com/embed/HAzstbNl7Vw"
-          title="Contraturno Escolar Clínica Lísias"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-
-        <a href="https://youtube.com/shorts/HAzstbNl7Vw" target="_blank" class="btn-video">
-          ▶ Assistir no YouTube
-        </a>
-      </div>
-
-      <div class="slide-ct" style="background-image:url('EscolaBrincando2.png')"></div>
-      <div class="slide-ct" style="background-image:url('EscolaAmbiente.png')"></div>
-      <div class="slide-ct" style="background-image:url('EscolaBrincando.png')"></div>
-      <div class="slide-ct" style="background-image:url('EscolaBrinquedoteca.png')"></div>
-      <div class="slide-ct" style="background-image:url('EscolaBriquedoteca2.png')"></div>
-      <div class="slide-ct" style="background-image:url('EscolaCrianças.png')"></div>
-      <div class="slide-ct" style="background-image:url('EscolaCrinaçasatividade.png')"></div>
-    </div>
-
-    <div class="cards">
-      <div class="card">
-        <strong>📚 Apoio Escolar</strong><br><br>
-        Auxílio nas tarefas e reforço das disciplinas escolares.
-      </div>
-
-      <div class="card">
-        <strong>🎨 Atividades Lúdicas</strong><br><br>
-        Oficinas criativas, jogos educativos e desenvolvimento cognitivo.
-      </div>
-
-      <div class="card">
-        <strong>🧠 Desenvolvimento Socioemocional</strong><br><br>
-        Trabalhamos autonomia, organização e habilidades sociais.
-      </div>
-
-      <div class="card">
-        <strong>🍎 Rotina Estruturada</strong><br><br>
-        Ambiente organizado com horários e acompanhamento profissional.
-      </div>
-    </div>
-
-    <div style="text-align:center; margin-top:30px;">
-      <a href="https://wa.me/55984246260?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20contraturno%20escolar"
-         target="_blank"
-         class="btn">
-        📲 Saber mais sobre o Contraturno
-      </a>
-    </div>
-  </section>
-
-  <section id="curso">
-    <h2>Curso para Mulheres – Eu te vejo lá na Frente</h2>
-
-    <p>
-      Um convite especial para mulheres que desejam desenvolver propósito,
-      crescimento pessoal e olhar com esperança para o futuro.
-    </p>
-
-    <div class="video-box">
-      <iframe
-        src="https://www.youtube.com/embed/UoyvTJefwNQ"
-        title="Curso Eu te vejo lá na Frente"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen>
-      </iframe>
-    </div>
-
-    <div style="text-align:center; margin-top:20px;">
-      <a href="https://wa.me/55984246260?text=Olá!%20Gostaria%20de%20participar%20do%20curso%20Eu%20te%20vejo%20Lá%20na%20Frente"
-         target="_blank"
-         class="btn">
-        ✨ Participar do Curso
-      </a>
-    </div>
-  </section>
-
-  <section id="livro" class="livro-section">
-    <div class="livro-box">
-
-      <div class="livro-capa">
-        <img src="livro-aba.jpg" alt="Livro Análise do Comportamento Aplicada ABA">
-      </div>
-
-      <div class="livro-info">
-        <span class="livro-tag">📘 Lançamento</span>
-
-        <h2>Lançamento do Livro</h2>
-
-        <h3>Análise do Comportamento Aplicada ABA – Teoria e Prática</h3>
-
+    <div class="container hero-content">
+      <div class="hero-copy reveal visible">
+        <span class="eyebrow"><i class="fa-solid fa-seedling"></i> Atendimento acolhedor e especializado</span>
+        <h1>Cuidando da aprendizagem, do desenvolvimento e da autonomia</h1>
         <p>
-          A Clínica Lísias apresenta este lançamento especial sobre Análise do
-          Comportamento Aplicada ABA, reunindo teoria e prática em uma obra voltada
-          ao desenvolvimento, aprendizagem e intervenção.
+          Clínica psicopedagógica em Seberi/RS com atendimento para crianças,
+          adolescentes e adultos, contraturno escolar, orientação familiar e projetos
+          de desenvolvimento humano.
         </p>
 
-        <p>
-          Garanta o seu exemplar pelo botão abaixo. Você será direcionado para a
-          página oficial de compra da Literare Books.
-        </p>
-
-        <div class="livro-botoes">
-          <a href="https://loja.literarebooks.com.br/autoajuda/analise-do-comportamento-aplicada-aba-teoria-e-pratica?parceiro=13988"
-             target="_blank"
-             class="btn">
-            🛒 Comprar Livro
+        <div class="hero-actions">
+          <a href="https://wa.me/55984246260?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20na%20Clínica%20Lísias" target="_blank" class="btn">
+            <i class="fa-brands fa-whatsapp"></i> Agendar Atendimento
           </a>
-
-          <a href="https://wa.me/55984246260?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20livro%20Análise%20do%20Comportamento%20Aplicada%20ABA"
-             target="_blank"
-             class="btn btn-secundario">
-            📲 Saber mais
+          <a href="#servicos" class="btn btn-light">
+            Conhecer Serviços
           </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat"><strong>ABA</strong><span>Teoria e prática em destaque</span></div>
+          <div class="stat"><strong>9+</strong><span>Cidades no mapa de atuação</span></div>
+          <div class="stat"><strong>100%</strong><span>Atendimento humanizado</span></div>
         </div>
       </div>
 
+      <div class="hero-card reveal visible">
+        <img src="livro-aba.jpg" alt="Livro Análise do Comportamento Aplicada ABA">
+        <span class="eyebrow"><i class="fa-solid fa-book-open"></i> Lançamento do livro</span>
+        <h3>Análise do Comportamento Aplicada ABA</h3>
+        <p>Conheça a obra sobre ABA, teoria e prática, com compra disponível pela Literare Books.</p>
+        <a href="#livro" class="btn btn-secondary">Ver lançamento</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="highlight-strip reveal">
+      <div class="strip-item">
+        <i class="fa-solid fa-brain"></i>
+        <div><strong>Psicopedagogia</strong><span>Avaliação, intervenção e acompanhamento.</span></div>
+      </div>
+      <div class="strip-item">
+        <i class="fa-solid fa-child-reaching"></i>
+        <div><strong>Contraturno</strong><span>Rotina segura, educativa e acolhedora.</span></div>
+      </div>
+      <div class="strip-item">
+        <i class="fa-solid fa-users"></i>
+        <div><strong>Famílias</strong><span>Orientação para pais e responsáveis.</span></div>
+      </div>
+      <div class="strip-item">
+        <i class="fa-solid fa-location-dot"></i>
+        <div><strong>Seberi/RS</strong><span>Atendimento local e regional.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" id="sobre">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow"><i class="fa-solid fa-house-medical"></i> Sobre a clínica</span>
+        <h2>Um espaço preparado para acolher, orientar e desenvolver</h2>
+        <p>
+          A Clínica Lísias oferece atendimento psicopedagógico especializado para crianças,
+          adolescentes e adultos com dificuldades de aprendizagem, atenção e desenvolvimento escolar.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card about-card reveal">
+          <div class="icon"><i class="fa-solid fa-heart"></i></div>
+          <h3>Acolhimento</h3>
+          <p>Um ambiente pensado para receber cada pessoa com respeito, escuta e cuidado.</p>
+        </div>
+        <div class="card about-card reveal">
+          <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
+          <h3>Desenvolvimento</h3>
+          <p>Estratégias para estimular aprendizagem, autonomia, organização e evolução escolar.</p>
+        </div>
+        <div class="card about-card reveal">
+          <div class="icon"><i class="fa-solid fa-hands-holding-child"></i></div>
+          <h3>Família e escola</h3>
+          <p>Orientação para que pais, escola e profissionais caminhem juntos no processo.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="servicos">
-    <h2>Serviços</h2>
+  <section class="section" id="profissional">
+    <div class="container professional-wrap">
+      <div class="video-card reveal">
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/zDge0G4eDYQ"
+            title="Apresentação da Clínica Lísias"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
 
-    <div class="cards">
-      <div class="card"><strong>Avaliação Psicopedagógica</strong></div>
-      <div class="card"><strong>Intervenção Psicopedagógica</strong></div>
-      <div class="card"><strong>Orientação para Pais</strong></div>
-      <div class="card"><strong>Acompanhamento Escolar</strong></div>
+      <div class="reveal">
+        <span class="eyebrow"><i class="fa-solid fa-user-graduate"></i> Sobre a profissional</span>
+        <h2>Experiência para acompanhar cada etapa da aprendizagem</h2>
+        <p>
+          A Clínica Lísias é conduzida por profissionais especializados em Psicopedagogia
+          Clínica e Institucional, com experiência no acompanhamento de crianças e adolescentes
+          com dificuldades de aprendizagem, atenção e desenvolvimento escolar.
+        </p>
+        <ul class="list-check">
+          <li><i class="fa-solid fa-check"></i> Atendimento psicopedagógico individualizado.</li>
+          <li><i class="fa-solid fa-check"></i> Apoio em dificuldades de aprendizagem e organização escolar.</li>
+          <li><i class="fa-solid fa-check"></i> Orientação para pais, responsáveis e rotina familiar.</li>
+          <li><i class="fa-solid fa-check"></i> Olhar integrado para desenvolvimento cognitivo e socioemocional.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <section id="mapa">
-    <h2>Mapa de Atuação</h2>
-    <div id="map"></div>
+  <section class="section contraturno-area" id="contraturno">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow"><i class="fa-solid fa-school"></i> Escola de Contraturno</span>
+        <h2>Rotina educativa, segura e acolhedora no turno inverso</h2>
+        <p>
+          Nosso contraturno escolar oferece apoio pedagógico, desenvolvimento socioemocional
+          e atividades complementares para crianças em idade escolar.
+        </p>
+      </div>
+
+      <div class="slider-contraturno reveal">
+        <button class="slider-btn prev" type="button" aria-label="Slide anterior">&#10094;</button>
+        <button class="slider-btn next" type="button" aria-label="Próximo slide">&#10095;</button>
+
+        <div class="slide-ct active">
+          <iframe
+            src="https://www.youtube.com/embed/HAzstbNl7Vw"
+            title="Contraturno Escolar Clínica Lísias"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+          <a href="https://youtube.com/shorts/HAzstbNl7Vw" target="_blank" class="btn-video">▶ Assistir no YouTube</a>
+        </div>
+
+        <div class="slide-ct" style="background-image:url('EscolaBrincando2.png')"></div>
+        <div class="slide-ct" style="background-image:url('EscolaAmbiente.png')"></div>
+        <div class="slide-ct" style="background-image:url('EscolaBrincando.png')"></div>
+        <div class="slide-ct" style="background-image:url('EscolaBrinquedoteca.png')"></div>
+        <div class="slide-ct" style="background-image:url('EscolaBriquedoteca2.png')"></div>
+        <div class="slide-ct" style="background-image:url('EscolaCrianças.png')"></div>
+        <div class="slide-ct" style="background-image:url('EscolaCrinaçasatividade.png')"></div>
+      </div>
+
+      <div class="grid grid-4">
+        <div class="card reveal">
+          <div class="icon"><i class="fa-solid fa-book"></i></div>
+          <h3>Apoio Escolar</h3>
+          <p>Auxílio nas tarefas e reforço das disciplinas escolares.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><i class="fa-solid fa-palette"></i></div>
+          <h3>Atividades Lúdicas</h3>
+          <p>Oficinas criativas, jogos educativos e desenvolvimento cognitivo.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><i class="fa-solid fa-face-smile"></i></div>
+          <h3>Socioemocional</h3>
+          <p>Trabalhamos autonomia, organização e habilidades sociais.</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon"><i class="fa-solid fa-calendar-check"></i></div>
+          <h3>Rotina Estruturada</h3>
+          <p>Ambiente organizado com horários e acompanhamento profissional.</p>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:32px;" class="reveal">
+        <a href="https://wa.me/55984246260?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20contraturno%20escolar" target="_blank" class="btn">
+          <i class="fa-brands fa-whatsapp"></i> Saber mais sobre o Contraturno
+        </a>
+      </div>
+    </div>
   </section>
 
-  <section id="contato">
-    <h2>Contato</h2>
-    <p>📍 Rua Bento Gonçalves, 200 – Centro - Seberi/RS</p>
-    <p>📞 (55) 98424-6260</p>
-    <p>📧 lisiasseberi@gmail.com</p>
+  <section class="section" id="curso">
+    <div class="container">
+      <div class="curso-card reveal">
+        <div>
+          <span class="eyebrow"><i class="fa-solid fa-sparkles"></i> Curso para mulheres</span>
+          <h2>Eu te vejo lá na Frente</h2>
+          <p>
+            Um convite especial para mulheres que desejam desenvolver propósito,
+            crescimento pessoal e olhar com esperança para o futuro.
+          </p>
+          <a href="https://wa.me/55984246260?text=Olá!%20Gostaria%20de%20participar%20do%20curso%20Eu%20te%20vejo%20Lá%20na%20Frente" target="_blank" class="btn">
+            ✨ Participar do Curso
+          </a>
+        </div>
+
+        <div class="video-card">
+          <div class="video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/UoyvTJefwNQ"
+              title="Curso Eu te vejo lá na Frente"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="livro">
+    <div class="container">
+      <div class="livro-box reveal">
+        <div class="livro-capa">
+          <img src="livro-aba.jpg" alt="Livro Análise do Comportamento Aplicada ABA">
+        </div>
+
+        <div class="livro-info">
+          <span class="eyebrow"><i class="fa-solid fa-book-open"></i> Lançamento</span>
+          <h2>Análise do Comportamento Aplicada ABA</h2>
+          <h3>Teoria e Prática</h3>
+          <p>
+            Um lançamento especial sobre Análise do Comportamento Aplicada ABA,
+            reunindo teoria e prática em uma obra voltada ao desenvolvimento,
+            aprendizagem e intervenção.
+          </p>
+          <p>
+            Garanta o seu exemplar pelo botão abaixo. Você será direcionado para a
+            página oficial de compra da Literare Books.
+          </p>
+
+          <div class="livro-botoes">
+            <a href="https://loja.literarebooks.com.br/autoajuda/analise-do-comportamento-aplicada-aba-teoria-e-pratica?parceiro=13988" target="_blank" class="btn">
+              <i class="fa-solid fa-cart-shopping"></i> Comprar Livro
+            </a>
+            <a href="https://wa.me/55984246260?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20livro%20Análise%20do%20Comportamento%20Aplicada%20ABA" target="_blank" class="btn btn-secondary">
+              <i class="fa-brands fa-whatsapp"></i> Saber mais
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="servicos">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow"><i class="fa-solid fa-hand-holding-heart"></i> Serviços</span>
+        <h2>Atendimentos e acompanhamentos</h2>
+        <p>Serviços voltados à aprendizagem, desenvolvimento escolar e orientação familiar.</p>
+      </div>
+
+      <div class="grid grid-4">
+        <div class="card service-card reveal">
+          <div class="icon"><i class="fa-solid fa-clipboard-check"></i></div>
+          <strong>Avaliação Psicopedagógica</strong>
+          <p>Identificação de dificuldades, potencialidades e necessidades de intervenção.</p>
+        </div>
+        <div class="card service-card reveal">
+          <div class="icon"><i class="fa-solid fa-puzzle-piece"></i></div>
+          <strong>Intervenção Psicopedagógica</strong>
+          <p>Estratégias práticas para evolução no processo de aprendizagem.</p>
+        </div>
+        <div class="card service-card reveal">
+          <div class="icon"><i class="fa-solid fa-people-roof"></i></div>
+          <strong>Orientação para Pais</strong>
+          <p>Apoio para famílias conduzirem a rotina, organização e acompanhamento.</p>
+        </div>
+        <div class="card service-card reveal">
+          <div class="icon"><i class="fa-solid fa-graduation-cap"></i></div>
+          <strong>Acompanhamento Escolar</strong>
+          <p>Suporte para desenvolvimento acadêmico, atenção, autonomia e desempenho.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contato">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="eyebrow"><i class="fa-solid fa-map-location-dot"></i> Localização e contato</span>
+        <h2>Fale com a Clínica Lísias</h2>
+        <p>Entre em contato para agendar um atendimento ou saber mais sobre os serviços.</p>
+      </div>
+
+      <div class="contact-wrap">
+        <div id="map" class="reveal"></div>
+
+        <div class="contact-card reveal">
+          <h3>Informações</h3>
+          <div class="contact-line">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <strong>Endereço</strong>
+              <span>Rua Bento Gonçalves, 200 – Centro<br>Seberi/RS</span>
+            </div>
+          </div>
+          <div class="contact-line">
+            <i class="fa-brands fa-whatsapp"></i>
+            <div>
+              <strong>WhatsApp</strong>
+              <a href="https://wa.me/55984246260" target="_blank">(55) 98424-6260</a>
+            </div>
+          </div>
+          <div class="contact-line">
+            <i class="fa-solid fa-envelope"></i>
+            <div>
+              <strong>E-mail</strong>
+              <a href="mailto:lisiasseberi@gmail.com">lisiasseberi@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-line">
+            <i class="fa-brands fa-instagram"></i>
+            <div>
+              <strong>Instagram</strong>
+              <a href="https://www.instagram.com/clinicalisias" target="_blank">@clinicalisias</a>
+            </div>
+          </div>
+          <a href="https://wa.me/55984246260?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20na%20Clínica%20Lísias" target="_blank" class="btn" style="width:100%; margin-top:20px;">
+            <i class="fa-brands fa-whatsapp"></i> Chamar no WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
   </section>
 
   <footer>
-    © 2026 – Clínica Lísias
+    <div class="container">
+      <p>© 2026 – Clínica Lísias. Todos os direitos reservados.</p>
+    </div>
   </footer>
 
-  <!-- BOTÕES FLUTUANTES -->
-  <a href="https://www.instagram.com/clinicalisias"
-     target="_blank"
-     class="insta-float"
-     aria-label="Instagram Clínica Lísias">
-    <i class="fa-brands fa-instagram"></i>
-  </a>
-
-  <a href="https://wa.me/55984246260"
-     target="_blank"
-     class="float-btn float-whatsapp"
-     aria-label="WhatsApp Clínica Lísias">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-
-  <a href="https://www.google.com/maps?q=Rua+Bento+Gonçalves+200+Centro+Seberi+RS"
-     target="_blank"
-     class="float-btn float-maps"
-     aria-label="Abrir localização no Google Maps">
-    📍
-  </a>
+  <div class="float-stack">
+    <a href="https://www.instagram.com/clinicalisias" target="_blank" class="float-btn float-insta" aria-label="Instagram Clínica Lísias">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+    <a href="https://www.google.com/maps?q=Rua+Bento+Gonçalves+200+Centro+Seberi+RS" target="_blank" class="float-btn float-maps" aria-label="Abrir localização no Google Maps">
+      <i class="fa-solid fa-location-dot"></i>
+    </a>
+    <a href="https://wa.me/55984246260" target="_blank" class="float-btn float-whatsapp" aria-label="WhatsApp Clínica Lísias">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", function(){
-
-      /* MENU MOBILE */
       const menuToggle = document.querySelector(".menu-toggle");
       const navLinks = document.querySelector(".nav-links");
 
       if(menuToggle && navLinks){
         menuToggle.addEventListener("click", function(){
           navLinks.classList.toggle("active");
+          document.body.classList.toggle("menu-open", navLinks.classList.contains("active"));
         });
 
         navLinks.querySelectorAll("a").forEach(function(link){
           link.addEventListener("click", function(){
             navLinks.classList.remove("active");
+            document.body.classList.remove("menu-open");
           });
         });
       }
 
-      /* SLIDER PRINCIPAL */
-      const slidesHero = document.querySelectorAll(".slide");
-      let currentHero = 0;
+      const heroSlides = document.querySelectorAll(".hero-slide");
+      let heroIndex = 0;
 
-      function showHeroSlide(index){
-        slidesHero.forEach(function(slide){
-          slide.classList.remove("active");
-        });
-
-        if(slidesHero[index]){
-          slidesHero[index].classList.add("active");
-        }
+      function showHero(index){
+        heroSlides.forEach(function(slide){ slide.classList.remove("active"); });
+        if(heroSlides[index]) heroSlides[index].classList.add("active");
       }
 
-      if(slidesHero.length > 0){
+      if(heroSlides.length > 1){
         setInterval(function(){
-          currentHero = (currentHero + 1) % slidesHero.length;
-          showHeroSlide(currentHero);
+          heroIndex = (heroIndex + 1) % heroSlides.length;
+          showHero(heroIndex);
         }, 6000);
       }
 
-      /* SLIDER CONTRATURNO */
       const slidesCt = document.querySelectorAll("#contraturno .slide-ct");
       const next = document.querySelector("#contraturno .next");
       const prev = document.querySelector("#contraturno .prev");
-
       let indexCt = 0;
-      let intervaloCt;
+      let autoCt;
 
-      function showCtSlide(index){
-        slidesCt.forEach(function(slide){
-          slide.classList.remove("active");
-        });
-
-        if(slidesCt[index]){
-          slidesCt[index].classList.add("active");
-        }
+      function showCt(index){
+        slidesCt.forEach(function(slide){ slide.classList.remove("active"); });
+        if(slidesCt[index]) slidesCt[index].classList.add("active");
       }
 
-      function nextCtSlide(){
+      function nextCt(){
         if(slidesCt.length === 0) return;
         indexCt = (indexCt + 1) % slidesCt.length;
-        showCtSlide(indexCt);
+        showCt(indexCt);
       }
 
-      function prevCtSlide(){
+      function prevCt(){
         if(slidesCt.length === 0) return;
         indexCt = (indexCt - 1 + slidesCt.length) % slidesCt.length;
-        showCtSlide(indexCt);
+        showCt(indexCt);
       }
 
-      function iniciarAutoCt(){
+      function startCt(){
         if(slidesCt.length > 1){
-          intervaloCt = setInterval(nextCtSlide, 6000);
+          autoCt = setInterval(nextCt, 6000);
         }
       }
 
-      function resetAutoCt(){
-        clearInterval(intervaloCt);
-        iniciarAutoCt();
+      function resetCt(){
+        clearInterval(autoCt);
+        startCt();
       }
 
       if(next){
         next.addEventListener("click", function(){
-          nextCtSlide();
-          resetAutoCt();
+          nextCt();
+          resetCt();
         });
       }
 
       if(prev){
         prev.addEventListener("click", function(){
-          prevCtSlide();
-          resetAutoCt();
+          prevCt();
+          resetCt();
         });
       }
 
-      showCtSlide(indexCt);
-      iniciarAutoCt();
+      showCt(indexCt);
+      startCt();
 
-      /* MAPA */
+      const reveals = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {threshold:.12});
+
+      reveals.forEach(function(item){ observer.observe(item); });
+
       const mapElement = document.getElementById("map");
 
       if(mapElement && typeof L !== "undefined"){
@@ -916,24 +1478,22 @@
 
         const iconeLisias = L.divIcon({
           html:`
-            <div style="background:#fff;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.25);border:2px solid #1f5f3a;">
-              <img src="lisias-logo.png" alt="Clínica Lísias" style="width:30px;height:auto;">
+            <div style="background:#fff;width:52px;height:52px;border-radius:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px rgba(0,0,0,.22);border:2px solid #1f5f3a;">
+              <img src="lisias-logo.png" alt="Clínica Lísias" style="width:32px;height:auto;">
             </div>
           `,
           className:"",
-          iconSize:[50,50],
-          iconAnchor:[25,50]
+          iconSize:[52,52],
+          iconAnchor:[26,52]
         });
 
         cidades.forEach(function(cidade){
           L.marker(cidade.coords, {icon:iconeLisias})
             .addTo(map)
-            .bindPopup(cidade.nome);
+            .bindPopup(`<strong>${cidade.nome}</strong><br>Área de atuação da Clínica Lísias`);
         });
       }
-
     });
   </script>
-
 </body>
 </html>
