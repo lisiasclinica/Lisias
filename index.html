@@ -1029,6 +1029,80 @@
         font-size:20px;
       }
     }
+    /* =====================
+   CORREÇÃO FORÇADA DO TOPO
+   Evita cortar os cards e melhora o encaixe na primeira tela
+===================== */
+
+.hero{
+  min-height: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.hero-slider,
+.hero-slide{
+  height: 100% !important;
+}
+
+.hero-content{
+  min-height: auto !important;
+  height: auto !important;
+  padding-top: 55px !important;
+  padding-bottom: 55px !important;
+  align-items: center !important;
+}
+
+.hero-copy h1{
+  font-size: clamp(38px, 4.4vw, 58px) !important;
+  line-height: 1.04 !important;
+  margin-bottom: 16px !important;
+}
+
+.hero-copy p{
+  font-size: 18px !important;
+  margin-bottom: 22px !important;
+}
+
+.hero-actions{
+  margin-bottom: 24px !important;
+}
+
+.hero-card{
+  max-width: 400px !important;
+  padding: 22px !important;
+}
+
+.hero-card img{
+  height: 175px !important;
+}
+
+.hero-card h3{
+  font-size: 24px !important;
+  line-height: 1.2 !important;
+}
+
+.hero-card p{
+  font-size: 15px !important;
+  margin-bottom: 16px !important;
+}
+
+.hero-stats{
+  gap: 10px !important;
+}
+
+.stat{
+  padding: 12px 14px !important;
+}
+
+.stat strong{
+  font-size: 22px !important;
+}
+
+.highlight-strip{
+  margin-top: 28px !important;
+  margin-bottom: 20px !important;
+}
   </style>
 </head>
 
